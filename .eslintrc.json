@@ -1,0 +1,15 @@
+{
+  "extends": "eslint:recommended",
+  "rules": {
+    "quotes": [2, "single"],
+    "linebreak-style": [2, "unix"],
+    "semi": [2, "always"],
+    "no-var": 2,
+    "spaced-comment": [2, "always"],
+    "comma-dangle": ["error", "always-multiline"]
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  }
+}
