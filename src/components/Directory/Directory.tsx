@@ -10,7 +10,7 @@ const DirectoryContainer = styled.div`
   justify-content: space-between;
 `;
 
-const allSections: MenuItemModel[] = [
+export const allSections: MenuItemModel[] = [
   {
     title: "hats",
     imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
@@ -48,14 +48,8 @@ const allSections: MenuItemModel[] = [
 const Directory: React.FC<{}> = () => {
   return (
     <DirectoryContainer>
-      {allSections.map(({ id, title, imageUrl, size }) => (
-        <MenuItem
-          key={id}
-          id={id}
-          title={title}
-          imageUrl={imageUrl}
-          size={size}
-        />
+      {allSections.map(({ id, ...rest }) => (
+        <MenuItem key={id} id={id} {...rest} />
       ))}
     </DirectoryContainer>
   );

@@ -1,11 +1,15 @@
+import { Route, Switch } from "react-router-dom";
+
+import Hats from "./views/Hats/Hats";
 import Homepage from "./views/Homepage/Homepage";
 import React from "react";
 
-const App: React.FC = () => {
+const App: React.FC<{}> = () => {
   return (
-    <div>
-      <Homepage />
-    </div>
+    <Switch>
+      <Route path="/" exact component={Homepage} />
+      <Route path="/shop/:article" component={Hats} />
+    </Switch>
   );
 };
 

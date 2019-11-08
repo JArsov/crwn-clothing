@@ -1,3 +1,5 @@
+import { RouteComponentProps, withRouter } from "react-router-dom";
+
 import React from "react";
 import { ifProp } from "styled-tools";
 import styled from "styled-components";
@@ -72,7 +74,7 @@ export interface MenuItemModel {
   id: number;
   title: string;
   imageUrl: string;
-  linkUrl?: string;
+  linkUrl: string;
   size?: string;
 }
 
@@ -80,11 +82,21 @@ export interface MenuItemProps {
   menuItem: MenuItemModel;
 }
 
-const MenuItem: React.FC<MenuItemModel> = ({ id, title, imageUrl, size }) => {
+export const MenuItem: React.FC<MenuItemModel & RouteComponentProps> = ({
+  title,
+  imageUrl,
+  size,
+  linkUrl,
+  match,
+  history
+}) => {
+  const navigateToView = () => {
+    history.push(`${match.url}${linkUrl}`);
+  };
   return (
     <MenuItemContainer size={size}>
       <MenuItemBackgroundImageContainer imageUrl={imageUrl} />
-      <MenuItemContentContainer>
+      <MenuItemContentContainer onClick={navigateToView}>
         <MenuItemTitle>{title.toUpperCase()}</MenuItemTitle>
         <MenuItemSubtitle>SHOP NOW</MenuItemSubtitle>
       </MenuItemContentContainer>
@@ -92,4 +104,4 @@ const MenuItem: React.FC<MenuItemModel> = ({ id, title, imageUrl, size }) => {
   );
 };
 
-export default MenuItem;
+export default withRouter(MenuItem);
