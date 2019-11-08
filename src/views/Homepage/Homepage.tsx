@@ -9,7 +9,7 @@ const HomepageContainer = styled.div`
   padding: 1.25rem 5rem;
 `;
 
-const Homepage: React.FC<{}> = () => {
+const Homepage: React.FC<{}> = props => {
   return (
     <HomepageContainer>
       <Directory />
