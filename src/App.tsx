@@ -1,15 +1,22 @@
 import { Route, Switch } from "react-router-dom";
 
-import Hats from "./views/Hats/Hats";
-import Homepage from "./views/Homepage/Homepage";
+import Home from "./views/Home/Home";
 import React from "react";
+import Shop from "./views/Shop/Shop";
+import styled from "styled-components";
+
+const AppContainer = styled.div`
+  padding: 2rem 4rem;
+`;
 
 const App: React.FC<{}> = () => {
   return (
-    <Switch>
-      <Route path="/" exact component={Homepage} />
-      <Route path="/shop/:article" component={Hats} />
-    </Switch>
+    <AppContainer>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/shop" exact component={Shop} />
+      </Switch>
+    </AppContainer>
   );
 };
 
