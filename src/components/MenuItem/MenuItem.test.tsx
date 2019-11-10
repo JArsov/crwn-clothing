@@ -1,7 +1,6 @@
-import { fireEvent, render, wait } from "@testing-library/react";
-
 import { MenuItem } from "./MenuItem";
 import React from "react";
+import { render } from "@testing-library/react";
 import { routerTestProps } from "../../shared/reactRouterHelper";
 
 test("should check if SHOP NOW subtitle is displayed in the component", () => {
