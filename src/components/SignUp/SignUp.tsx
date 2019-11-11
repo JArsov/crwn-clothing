@@ -79,6 +79,7 @@ export const SignUp: React.FC<{}> = () => {
           name="displayName"
           {...displayName}
           label="Display Name"
+          id="signUpDisplayName"
           required
         />
         <FormInput
@@ -86,6 +87,7 @@ export const SignUp: React.FC<{}> = () => {
           name="email"
           {...email}
           label="Email"
+          id="signUpEmail"
           required
         />
         <FormInput
@@ -93,6 +95,7 @@ export const SignUp: React.FC<{}> = () => {
           name="password"
           {...password}
           label="Password"
+          id="signUpPassword"
           required
         />
         <FormInput
@@ -100,6 +103,7 @@ export const SignUp: React.FC<{}> = () => {
           name="confirmPassword"
           {...confirmPassword}
           label="Confirm Password"
+          id="signUpConfirmPassword"
           required
         />
         <SignUpButton type="submit">SIGN UP</SignUpButton>

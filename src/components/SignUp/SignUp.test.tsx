@@ -6,25 +6,25 @@ import React from "react";
 import SignUp from "./SignUp";
 
 test("should check if an 'Passwords do not match' error message appears", () => {
-  const { getByLabelText, getByText } = render(<SignUp />);
+  const { getByAltText, getByText } = render(<SignUp />);
 
   act(() => {
-    fireEvent.change(getByLabelText("Display Name"), {
+    fireEvent.change(getByAltText("displayName"), {
       target: { value: "Name" }
     });
   });
   act(() => {
-    fireEvent.change(getByLabelText("Email"), {
+    fireEvent.change(getByAltText("email"), {
       target: { value: "orce.arsov@yasdasd.com" }
     });
   });
   act(() => {
-    fireEvent.change(getByLabelText("Password"), {
+    fireEvent.change(getByAltText("password"), {
       target: { value: "whatever" }
     });
   });
   act(() => {
-    fireEvent.change(getByLabelText("Confirm Password"), {
+    fireEvent.change(getByAltText("confirmPassword"), {
       target: { value: "whaasdasdtever2" }
     });
   });
@@ -41,19 +41,19 @@ test("should not sign up if the email already exists", () => {
       resolve(true);
     });
   });
-  const { getByLabelText, getByText } = render(<SignUp />);
+  const { getByAltText, getByText } = render(<SignUp />);
 
   act(() => {
-    fireEvent.change(getByLabelText("Display Name"), {
-      target: { value: "Name" }
-    });
-    fireEvent.change(getByLabelText("Email"), {
+    fireEvent.change(getByAltText("email"), {
       target: { value: "jordan@gmail.com" }
     });
-    fireEvent.change(getByLabelText("Password"), {
+    fireEvent.change(getByAltText("displayName"), {
+      target: { value: "Name" }
+    });
+    fireEvent.change(getByAltText("password"), {
       target: { value: "whatever" }
     });
-    fireEvent.change(getByLabelText("Confirm Password"), {
+    fireEvent.change(getByAltText("confirmPassword"), {
       target: { value: "whatever" }
     });
 
@@ -61,6 +61,6 @@ test("should not sign up if the email already exists", () => {
   });
 
   // If the email exists, the input fields remain untouched
-  const nameInputField = getByLabelText("Display Name") as HTMLInputElement;
+  const nameInputField = getByAltText("displayName") as HTMLInputElement;
   expect(nameInputField.value).toEqual("Name");
 });

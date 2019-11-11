@@ -40,20 +40,22 @@ export interface FormInputProps {
   value: string;
   label: string;
   required?: boolean;
+  id: string;
 }
 
 const FormInput: React.FC<FormInputProps> = props => {
   return (
     <FromInputContainer>
       {props.label ? (
-        <FormInputLabel {...props} htmlFor={props.name}>
+        <FormInputLabel {...props} htmlFor={props.id}>
           {props.label}
         </FormInputLabel>
       ) : null}
       <FormInputField
-        id={props.name}
+        id={props.id}
         onChange={props.handleChange}
         {...props}
+        alt={props.name}
       />
     </FromInputContainer>
   );

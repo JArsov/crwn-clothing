@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import React from "react";
+import { RootState } from "../../store/reducers/types/RootState";
+import { UserOrNull } from "../../store/reducers/types/UserState";
 import { auth } from "../../firebase/firebase.utils";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -32,11 +35,10 @@ const SignInSignOutButton = styled.div`
   cursor: pointer;
 `;
 
-interface HeaderProps {
-  currentUser: any;
-}
-
-const Header: React.FC<HeaderProps> = ({ currentUser }) => {
+const Header: React.FC<{}> = () => {
+  const currentUser = useSelector<RootState, UserOrNull>(
+    state => state.user.currentUser
+  );
   return (
     <HeaderContainer>
       <LogoContainer to="/">

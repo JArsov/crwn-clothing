@@ -70,6 +70,7 @@ const SignIn: React.FC<{}> = () => {
           name="email"
           label="Email"
           {...email}
+          id="signInEmail"
           required
         />
         <FormInput
@@ -77,6 +78,7 @@ const SignIn: React.FC<{}> = () => {
           name="password"
           label="Password"
           {...password}
+          id="signInPassword"
           required
         />
         <SignInButton type="submit">Sign in</SignInButton>

@@ -1,14 +1,22 @@
 import { fireEvent, render } from "@testing-library/react";
 
+import { Provider } from "react-redux";
 import React from "react";
 import SignIn from "./SignIn";
 import { auth } from "../../firebase/firebase.utils";
+import configureStore from "../../store/reduxConfig";
+
+const mockStore = configureStore();
 
 test("should check if an error message appears when the credentials are invalid", () => {
   jest.spyOn(auth, "signInWithEmailAndPassword").mockImplementationOnce(() => {
     throw new Error();
   });
-  const { getByLabelText, getByText } = render(<SignIn />);
+  const { getByLabelText, getByText } = render(
+    <Provider store={mockStore}>
+      <SignIn />
+    </Provider>
+  );
 
   fireEvent.change(getByLabelText("Email"), {
     currentTarget: { value: "orce.arsov@yasdasd.com" }

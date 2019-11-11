@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
+import {
+  UserActionTypes,
+  UserActionWithPayload
+} from "./store/actions/userActions";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 import Header from "./components/Header/Header";
@@ -7,6 +11,7 @@ import Home from "./views/Home/Home";
 import Shop from "./views/Shop/Shop";
 import SignInSignUp from "./views/SignInSignUp/SignInSignUp";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 const AppContainer = styled.div`
   padding: 2rem 4rem;
@@ -22,7 +27,7 @@ const AppContainer = styled.div`
 `;
 
 const App: React.FC<{}> = () => {
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const dispatch = useDispatch<Dispatch<UserActionWithPayload>>();
   useEffect(() => {
     let unsubscribeFromAuth: firebase.Unsubscribe | null = null;
     unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -35,14 +40,20 @@ const App: React.FC<{}> = () => {
                 id: snapshot.id,
                 ...snapshot.data()
               };
-              if (!currentUser || currentUser.id !== userFromSnapshot.id) {
-                setCurrentUser(userFromSnapshot);
+              if (userFromSnapshot.id) {
+                dispatch({
+                  type: UserActionTypes.SET_CURRENT_USER,
+                  payload: { currentUser: snapshot.data() }
+                });
               }
             }
           });
         }
       } else {
-        setCurrentUser(null);
+        dispatch({
+          type: UserActionTypes.SET_CURRENT_USER,
+          payload: { currentUser: null }
+        });
       }
     });
 
@@ -52,11 +63,11 @@ const App: React.FC<{}> = () => {
         unsubscribeFromAuth();
       }
     };
-  }, [currentUser]);
+  });
 
   return (
     <AppContainer>
-      <Header currentUser={currentUser} />
+      <Header />
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/shop" component={Shop} />
