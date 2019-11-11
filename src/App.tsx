@@ -1,17 +1,19 @@
 import React, { Dispatch, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import {
   UserActionTypes,
   UserActionWithPayload
 } from "./store/actions/userActions";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { useDispatch, useSelector } from "react-redux";
 
 import Header from "./components/Header/Header";
 import Home from "./views/Home/Home";
+import { RootState } from "./store/reducers/types/RootState";
 import Shop from "./views/Shop/Shop";
 import SignInSignUp from "./views/SignInSignUp/SignInSignUp";
+import { UserOrNull } from "./store/reducers/types/UserState";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
 
 const AppContainer = styled.div`
   padding: 2rem 4rem;
@@ -28,6 +30,10 @@ const AppContainer = styled.div`
 
 const App: React.FC<{}> = () => {
   const dispatch = useDispatch<Dispatch<UserActionWithPayload>>();
+  const currentUser = useSelector<RootState, UserOrNull>(
+    state => state.user.currentUser
+  );
+
   useEffect(() => {
     let unsubscribeFromAuth: firebase.Unsubscribe | null = null;
     unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -71,7 +77,11 @@ const App: React.FC<{}> = () => {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/shop" component={Shop} />
-        <Route path="/sign-in" component={SignInSignUp} />
+        <Route
+          path="/sign-in"
+          exact
+          render={() => (currentUser ? <Redirect to="/" /> : <SignInSignUp />)}
+        />
       </Switch>
     </AppContainer>
   );
