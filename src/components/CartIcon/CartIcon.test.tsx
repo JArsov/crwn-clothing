@@ -3,7 +3,6 @@ import * as ReactRedux from "react-redux";
 import { fireEvent, render } from "@testing-library/react";
 
 import { BrowserRouter } from "react-router-dom";
-import { CartActionTypes } from "../../store/actions/cartActions";
 import CartIcon from "./CartIcon";
 import React from "react";
 import configureStore from "../../store/reduxConfig";

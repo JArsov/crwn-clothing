@@ -1,7 +1,13 @@
+import {
+  CartActionTypes,
+  CartActionWithPayload
+} from "../../store/actions/cartActions";
+import React, { Dispatch } from "react";
+
 import Button from "../Button/Button";
-import React from "react";
 import { ShopDataItem } from "../../shared/shop.data";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 const CollectionItemContainer = styled.div`
   display: flex;
@@ -29,20 +35,30 @@ const CollectionItemButton = styled(Button)`
   opacity: 0.7;
 `;
 
-const CollectionItem: React.FC<ShopDataItem> = ({
-  id,
-  name,
-  imageUrl,
-  price
-}) => {
+interface CollectionItemProps {
+  item: ShopDataItem;
+}
+
+const CollectionItem: React.FC<CollectionItemProps> = ({ item }) => {
+  const dispatch = useDispatch<Dispatch<CartActionWithPayload>>();
+  const addToCartHandler = () => {
+    dispatch({
+      type: CartActionTypes.ADD_ITEM,
+      payload: {
+        item
+      }
+    });
+  };
   return (
     <CollectionItemContainer>
-      <CollectionItemImage imageUrl={imageUrl} />
+      <CollectionItemImage imageUrl={item.imageUrl} />
       <CollectionItemFooter>
-        <span>{name}</span>
-        <span>{price}</span>
+        <span>{item.name}</span>
+        <span>{item.price}</span>
       </CollectionItemFooter>
-      <CollectionItemButton>Add to cart</CollectionItemButton>
+      <CollectionItemButton onClick={addToCartHandler}>
+        Add to cart
+      </CollectionItemButton>
     </CollectionItemContainer>
   );
 };

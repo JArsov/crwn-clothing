@@ -27,7 +27,7 @@ const CollectionPreview: React.FC<ShopData> = ({ title, items }) => {
         {items
           .filter((_, index) => index < 4)
           .map(item => (
-            <CollectionItem key={item.id} {...item} />
+            <CollectionItem key={item.id} item={item} />
           ))}
       </PreviewContainer>
     </CollectionPreviewContainer>
