@@ -1,3 +1,5 @@
+import CartDropdown from "../CartDropdown/CartDropdown";
+import CartIcon from "../CartIcon/CartIcon";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import React from "react";
@@ -39,6 +41,9 @@ const Header: React.FC<{}> = () => {
   const currentUser = useSelector<RootState, UserOrNull>(
     state => state.user.currentUser
   );
+  const isCartHidden = useSelector<RootState, boolean>(
+    state => state.cart.hidden
+  );
   return (
     <HeaderContainer>
       <LogoContainer to="/">
@@ -54,7 +59,9 @@ const Header: React.FC<{}> = () => {
         ) : (
           <HeaderOptionsLink to="/sign-in">SIGN IN</HeaderOptionsLink>
         )}
+        <CartIcon />
       </HeaderOptionsContainer>
+      {!isCartHidden ? <CartDropdown /> : null}
     </HeaderContainer>
   );
 };

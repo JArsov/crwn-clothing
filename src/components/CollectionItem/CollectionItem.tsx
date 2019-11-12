@@ -1,3 +1,4 @@
+import Button from "../Button/Button";
 import React from "react";
 import { ShopDataItem } from "../../shared/shop.data";
 import styled from "styled-components";
@@ -14,11 +15,18 @@ const CollectionItemImage = styled.div<{ imageUrl: string }>`
   background-size: cover;
   background-position: center;
   background-image: url(${props => props.imageUrl});
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const CollectionItemFooter = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const CollectionItemButton = styled(Button)`
+  opacity: 0.7;
 `;
 
 const CollectionItem: React.FC<ShopDataItem> = ({
@@ -34,6 +42,7 @@ const CollectionItem: React.FC<ShopDataItem> = ({
         <span>{name}</span>
         <span>{price}</span>
       </CollectionItemFooter>
+      <CollectionItemButton>Add to cart</CollectionItemButton>
     </CollectionItemContainer>
   );
 };

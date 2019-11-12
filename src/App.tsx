@@ -34,6 +34,8 @@ const App: React.FC<{}> = () => {
     state => state.user.currentUser
   );
 
+  const currentUserOrEmail = currentUser ? currentUser.email : currentUser;
+
   useEffect(() => {
     let unsubscribeFromAuth: firebase.Unsubscribe | null = null;
     unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -69,7 +71,7 @@ const App: React.FC<{}> = () => {
         unsubscribeFromAuth();
       }
     };
-  });
+  }, [currentUserOrEmail, dispatch]);
 
   return (
     <AppContainer>
