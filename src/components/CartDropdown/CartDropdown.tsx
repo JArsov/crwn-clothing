@@ -1,11 +1,15 @@
 import Button from "../Button/Button";
+import { CartItem } from "../../store/reducers/types/CartState";
+import CartItemComponent from "../CartItem/CartItem";
 import React from "react";
+import { RootState } from "../../store/reducers/types/RootState";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const CartDropdownContainer = styled.div`
   position: absolute;
   width: 15rem;
-  height: 21.5;
+  height: 21.5rem;
   display: flex;
   flex-direction: column;
   padding: 1.25rem;
@@ -20,7 +24,8 @@ const CartItemsContainer = styled.div`
   height: 15rem;
   display: flex;
   flex-direction: column;
-  overflow: scroll-y;
+  overflow: scroll;
+  overflow-x: hidden;
 `;
 
 const GoToCheckoutButton = styled(Button)`
@@ -28,9 +33,16 @@ const GoToCheckoutButton = styled(Button)`
 `;
 
 const CartDropdown: React.FC<{}> = () => {
+  const cartItems = useSelector<RootState, CartItem[]>(
+    state => state.cart.cartItems
+  );
   return (
     <CartDropdownContainer>
-      <CartItemsContainer></CartItemsContainer>
+      <CartItemsContainer>
+        {cartItems.map(cartItem => (
+          <CartItemComponent key={cartItem.id} {...cartItem} />
+        ))}
+      </CartItemsContainer>
       <GoToCheckoutButton>GO TO CHECKOUT</GoToCheckoutButton>
     </CartDropdownContainer>
   );
