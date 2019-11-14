@@ -5,7 +5,7 @@ import { act, fireEvent, render } from "@testing-library/react";
 import React from "react";
 import SignUp from "./SignUp";
 
-test("should check if an 'Passwords do not match' error message appears", () => {
+it("should check if an 'Passwords do not match' error message appears", () => {
   const { getByAltText, getByText } = render(<SignUp />);
 
   act(() => {
@@ -35,7 +35,7 @@ test("should check if an 'Passwords do not match' error message appears", () => 
   expect(getByText("Passwords do not match!")).toBeDefined();
 });
 
-test("should not sign up if the email already exists", () => {
+it("should not sign up if the email already exists", () => {
   jest.spyOn(firebaseUtils, "doesEmailExist").mockImplementationOnce(_ => {
     return new Promise<boolean>(resolve => {
       resolve(true);

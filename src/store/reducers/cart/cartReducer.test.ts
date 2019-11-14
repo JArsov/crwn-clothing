@@ -1,5 +1,10 @@
 import { CartItem, CartState } from "../types/CartState";
-import { addItem, toggleCartHidden } from "../../actions/cartActions";
+import {
+  addItem,
+  clearItem,
+  removeItem,
+  toggleCartHidden
+} from "../../actions/cartActions";
 
 import { ShopDataItem } from "../../../shared/shop.data";
 import cartReducer from "./cartReducer";
@@ -9,7 +14,7 @@ export const mockState: CartState = {
   cartItems: []
 };
 
-const mockCartItems: CartItem[] = [
+let mockCartItems: CartItem[] = [
   {
     id: 1,
     imageUrl: "image-url",
@@ -18,13 +23,32 @@ const mockCartItems: CartItem[] = [
     quantity: 3
   },
   {
-    id: 1,
+    id: 2,
     imageUrl: "image-url2",
     name: "Name 2",
     price: 1,
     quantity: 1
   }
 ];
+
+beforeEach(() => {
+  mockCartItems = [
+    {
+      id: 1,
+      imageUrl: "image-url",
+      name: "Name 1",
+      price: 1,
+      quantity: 3
+    },
+    {
+      id: 2,
+      imageUrl: "image-url2",
+      name: "Name 2",
+      price: 1,
+      quantity: 1
+    }
+  ];
+});
 
 describe("CartReducer", () => {
   it("should toggle the cartHidden property", () => {
@@ -57,5 +81,40 @@ describe("CartReducer", () => {
     const newState = cartReducer(mockState, addItem(itemToBeAdded));
 
     expect(newState.cartItems.length).toBe(mockState.cartItems.length + 1);
+  });
+
+  it("should decrease the quantity of an existing cart item in the cart", () => {
+    mockState.cartItems = mockCartItems;
+    const itemWhoseQuantityShouldBeDecreased: ShopDataItem = {
+      ...mockCartItems[0]
+    };
+
+    const newState = cartReducer(
+      mockState,
+      removeItem(itemWhoseQuantityShouldBeDecreased)
+    );
+
+    expect(newState.cartItems.length).toBe(mockState.cartItems.length);
+    expect(newState.cartItems[0].quantity).toBe(
+      mockState.cartItems[0].quantity - 1
+    );
+  });
+
+  it("should remove an item from the cart if it has quantity 1", () => {
+    mockState.cartItems = mockCartItems;
+    const itemToBeRemoved: ShopDataItem = { ...mockCartItems[1] };
+
+    const newState = cartReducer(mockState, removeItem(itemToBeRemoved));
+
+    expect(newState.cartItems.length).toBe(mockState.cartItems.length - 1);
+  });
+
+  it("should clear an item from the cart", () => {
+    mockState.cartItems = mockCartItems;
+    const itemToBeCleared: ShopDataItem = { ...mockCartItems[0] };
+
+    const newState = cartReducer(mockState, clearItem(itemToBeCleared));
+
+    expect(newState.cartItems.length).toBe(mockState.cartItems.length - 1);
   });
 });

@@ -8,7 +8,7 @@ import configureStore from "../../store/reduxConfig";
 
 const mockStore = configureStore();
 
-test("should check if an error message appears when the credentials are invalid", () => {
+it("should check if an error message appears when the credentials are invalid", () => {
   jest.spyOn(auth, "signInWithEmailAndPassword").mockImplementationOnce(() => {
     throw new Error();
   });
@@ -29,7 +29,7 @@ test("should check if an error message appears when the credentials are invalid"
   expect(getByText("Incorrect username/password combination")).toBeDefined();
 });
 
-test("should successfully log in the user if correct credentials have been put", () => {
+it("should successfully log in the user if correct credentials have been put", () => {
   const mockUserCredentials: firebase.auth.UserCredential = {
     additionalUserInfo: null,
     credential: null,

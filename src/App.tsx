@@ -5,14 +5,16 @@ import {
   UserActionWithPayload
 } from "./store/actions/userActions";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
+import Checkout from "./views/Checkout/Checkout";
 import Header from "./components/Header/Header";
 import Home from "./views/Home/Home";
 import { RootState } from "./store/reducers/types/RootState";
 import Shop from "./views/Shop/Shop";
 import SignInSignUp from "./views/SignInSignUp/SignInSignUp";
 import { UserOrNull } from "./store/reducers/types/UserState";
+import { selectCurrentUser } from "./store/selectors/user/userSelectors";
 import styled from "styled-components";
 
 const AppContainer = styled.div`
@@ -31,7 +33,8 @@ const AppContainer = styled.div`
 const App: React.FC<{}> = () => {
   const dispatch = useDispatch<Dispatch<UserActionWithPayload>>();
   const currentUser = useSelector<RootState, UserOrNull>(
-    state => state.user.currentUser
+    selectCurrentUser,
+    shallowEqual
   );
 
   const currentUserOrEmail = currentUser ? currentUser.email : currentUser;
@@ -79,6 +82,7 @@ const App: React.FC<{}> = () => {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/shop" component={Shop} />
+        <Route path="/checkout" component={Checkout} />
         <Route
           path="/sign-in"
           exact

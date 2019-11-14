@@ -3,7 +3,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { routerTestProps } from "../../shared/reactRouterHelper";
 
-test("should check if SHOP NOW subtitle is displayed in the component", () => {
+it("should check if SHOP NOW subtitle is displayed in the component", () => {
   const { history, location, match } = routerTestProps("/route/:id", {
     id: "1"
   });

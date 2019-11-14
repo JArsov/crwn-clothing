@@ -1,3 +1,5 @@
+import { shallowEqual, useSelector } from "react-redux";
+
 import CartDropdown from "../CartDropdown/CartDropdown";
 import CartIcon from "../CartIcon/CartIcon";
 import { Link } from "react-router-dom";
@@ -6,8 +8,9 @@ import React from "react";
 import { RootState } from "../../store/reducers/types/RootState";
 import { UserOrNull } from "../../store/reducers/types/UserState";
 import { auth } from "../../firebase/firebase.utils";
+import { selectCurrentUser } from "../../store/selectors/user/userSelectors";
+import { selectIsCartHidden } from "../../store/selectors/cart/cartSelectors";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -39,11 +42,18 @@ const SignInSignOutButton = styled.div`
 
 const Header: React.FC<{}> = () => {
   const currentUser = useSelector<RootState, UserOrNull>(
-    state => state.user.currentUser
+    selectCurrentUser,
+    shallowEqual
   );
   const isCartHidden = useSelector<RootState, boolean>(
-    state => state.cart.hidden
+    selectIsCartHidden,
+    shallowEqual
   );
+
+  const handleSignOutClick = () => {
+    auth.signOut();
+  };
+
   return (
     <HeaderContainer>
       <LogoContainer to="/">
@@ -53,7 +63,7 @@ const Header: React.FC<{}> = () => {
         <HeaderOptionsLink to="/shop">SHOP</HeaderOptionsLink>
         <HeaderOptionsLink to="/shop">CONTACT</HeaderOptionsLink>
         {currentUser ? (
-          <SignInSignOutButton onClick={() => auth.signOut()}>
+          <SignInSignOutButton onClick={handleSignOutClick}>
             SIGN OUT
           </SignInSignOutButton>
         ) : (

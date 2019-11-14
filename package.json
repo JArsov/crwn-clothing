@@ -22,6 +22,8 @@
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.3",
+    "reselect": "^4.0.0",
     "styled-components": "^4.4.1",
     "styled-tools": "^1.7.1",
     "typescript": "3.6.4"

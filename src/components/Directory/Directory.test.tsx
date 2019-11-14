@@ -6,7 +6,7 @@ import React from "react";
 
 afterEach(cleanup);
 
-test("should check if all menu items in the directory are shown on the page", () => {
+it("should check if all menu items in the directory are shown on the page", () => {
   const { queryByText } = render(
     <BrowserRouter>
       <Directory />

@@ -3,10 +3,12 @@ import {
   CartActionWithPayload
 } from "../../store/actions/cartActions";
 import React, { Dispatch } from "react";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
+import { RootState } from "../../store/reducers/types/RootState";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
+import { selectCartItemsTotalQuantity } from "../../store/selectors/cart/cartSelectors";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
 
 const CartIconContainer = styled.div`
   width: 3rem;
@@ -32,6 +34,10 @@ const StyledShoppingIcon = styled(ShoppingIcon)`
 
 const CartIcon: React.FC<{}> = () => {
   const dispatch = useDispatch<Dispatch<CartActionWithPayload>>();
+  const cartItemsQuantity = useSelector<RootState, number>(
+    selectCartItemsTotalQuantity,
+    shallowEqual
+  );
 
   const handleCartIconClick = () => {
     dispatch({
@@ -47,7 +53,7 @@ const CartIcon: React.FC<{}> = () => {
       data-testid="cart-icon"
     >
       <StyledShoppingIcon />
-      <ItemCount> 0 </ItemCount>
+      <ItemCount> {cartItemsQuantity} </ItemCount>
     </CartIconContainer>
   );
 };

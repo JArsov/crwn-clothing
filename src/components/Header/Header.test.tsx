@@ -8,7 +8,7 @@ import configureStore from "../../store/reduxConfig";
 
 const mockStore = configureStore();
 
-test("display 'Sign In' button if the user is not signed in", () => {
+it("should display 'Sign In' button if the user is not signed in", () => {
   const { queryByText } = render(
     <Provider store={mockStore}>
       <BrowserRouter>
@@ -20,7 +20,7 @@ test("display 'Sign In' button if the user is not signed in", () => {
   expect(queryByText("SIGN IN")).toBeDefined();
 });
 
-test("display the cart component if the cart icon is clicked", () => {
+it("should display the cart component if the cart icon is clicked", () => {
   const { queryByText, getByTestId, getByText } = render(
     <Provider store={mockStore}>
       <BrowserRouter>
