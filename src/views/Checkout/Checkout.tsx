@@ -71,7 +71,7 @@ const Checkout: React.FC<{}> = () => {
         </LastCheckoutHeaderBlock>
       </CheckoutHeader>
       {cartItems.map(cartItem => (
-        <CheckoutItem {...cartItem} />
+        <CheckoutItem key={cartItem.id} {...cartItem} />
       ))}
       <TotalPriceContainer>
         <span>TOTAL: ${totalPrice}</span>

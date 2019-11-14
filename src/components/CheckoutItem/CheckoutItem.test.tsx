@@ -6,9 +6,8 @@ import { BrowserRouter } from "react-router-dom";
 import { CartItem } from "../../store/reducers/types/CartState";
 import CheckoutItem from "./CheckoutItem";
 import React from "react";
-import configureStore from "../../store/reduxConfig";
+import { store as mockStore } from "../../store/storeConfig";
 
-const mockStore = configureStore();
 const mockCartItem: CartItem = {
   id: 1,
   imageUrl: "mock-image-url",

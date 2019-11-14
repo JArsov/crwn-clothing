@@ -4,9 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import Header from "./Header";
 import { Provider } from "react-redux";
 import React from "react";
-import configureStore from "../../store/reduxConfig";
-
-const mockStore = configureStore();
+import { store as mockStore } from "../../store/storeConfig";
 
 it("should display 'Sign In' button if the user is not signed in", () => {
   const { queryByText } = render(

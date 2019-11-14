@@ -1,4 +1,4 @@
-import { ActionWithPayload } from "../reduxHelper";
+import { ActionWithPayload } from "../storeHelper";
 import { UserOrNull } from "../reducers/types/UserState";
 
 export enum UserActionTypes {

@@ -4,9 +4,7 @@ import { Provider } from "react-redux";
 import React from "react";
 import SignIn from "./SignIn";
 import { auth } from "../../firebase/firebase.utils";
-import configureStore from "../../store/reduxConfig";
-
-const mockStore = configureStore();
+import { store as mockStore } from "../../store/storeConfig";
 
 it("should check if an error message appears when the credentials are invalid", () => {
   jest.spyOn(auth, "signInWithEmailAndPassword").mockImplementationOnce(() => {

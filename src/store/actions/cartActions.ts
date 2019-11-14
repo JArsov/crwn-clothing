@@ -1,4 +1,4 @@
-import { ActionWithPayload } from "../reduxHelper";
+import { ActionWithPayload } from "../storeHelper";
 import { ShopDataItem } from "../../shared/shop.data";
 
 export enum CartActionTypes {

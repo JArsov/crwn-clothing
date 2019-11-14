@@ -6,9 +6,8 @@ import { fireEvent, render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import CollectionItem from "./CollectionItem";
 import React from "react";
-import configureStore from "../../store/reduxConfig";
+import { store as mockStore } from "../../store/storeConfig";
 
-const mockStore = configureStore();
 const mockCollectionItem: ShopDataItem = {
   id: 1,
   imageUrl: "image-url",

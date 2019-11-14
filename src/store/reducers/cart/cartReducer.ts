@@ -3,7 +3,7 @@ import {
   CartActionWithPayload
 } from "../../actions/cartActions";
 import { addItemToCart, removeItemFromCart } from "../../../shared/cart.utils";
-import reducerWithActionMap, { ActionMap } from "../../reduxHelper";
+import reducerWithActionMap, { ActionMap } from "../../storeHelper";
 
 import { CartState } from "../types/CartState";
 import { Reducer } from "redux";

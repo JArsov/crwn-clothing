@@ -5,10 +5,8 @@ import { fireEvent, render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { CartDropdown } from "./CartDropdown";
 import React from "react";
-import configureStore from "../../store/reduxConfig";
+import { store as mockStore } from "../../store/storeConfig";
 import { routerTestProps } from "../../shared/reactRouterHelper";
-
-const mockStore = configureStore();
 
 it("should navigate to checkout when GO TO CHECKOUT button is clicked", () => {
   const { history, location, match } = routerTestProps("/checkout", {});

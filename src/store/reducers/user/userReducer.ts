@@ -2,7 +2,7 @@ import {
   UserActionTypes,
   UserActionWithPayload
 } from "../../actions/userActions";
-import reducerWithActionMap, { ActionMap } from "../../reduxHelper";
+import reducerWithActionMap, { ActionMap } from "../../storeHelper";
 
 import { Reducer } from "redux";
 import { UserState } from "../types/UserState";

@@ -5,9 +5,7 @@ import { fireEvent, render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import CartIcon from "./CartIcon";
 import React from "react";
-import configureStore from "../../store/reduxConfig";
-
-const mockStore = configureStore();
+import { store as mockStore } from "../../store/storeConfig";
 
 it("should dispatch an action toggleCartHidden action when the cart icon is clicked", () => {
   jest.spyOn(ReactRedux, "useDispatch");
