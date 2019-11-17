@@ -1,10 +1,10 @@
-import { CartItem } from "../store/reducers/types/CartState";
-import { ShopDataItem } from "./shop.data";
+import { CartItem } from "../../store/reducers/types/CartState";
+import { ShopDataItem } from "../../store/reducers/types/ShopState";
 
 export const addItemToCart = (
   cartItems: CartItem[],
   cartItemToAdd: ShopDataItem
-) => {
+): CartItem[] => {
   const existingCartItem = cartItems.find(item => item.id === cartItemToAdd.id);
 
   if (existingCartItem) {

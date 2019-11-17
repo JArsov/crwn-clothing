@@ -1,11 +1,12 @@
 import * as ReactRedux from "react-redux";
 
-import SHOP_DATA, { ShopDataItem } from "../../shared/shop.data";
 import { fireEvent, render } from "@testing-library/react";
 
 import { BrowserRouter } from "react-router-dom";
 import CollectionItem from "./CollectionItem";
 import React from "react";
+import SHOP_DATA from "../../shared/shop.data";
+import { ShopDataItem } from "../../store/reducers/types/ShopState";
 import { store as mockStore } from "../../store/storeConfig";
 
 const mockCollectionItem: ShopDataItem = {
@@ -19,11 +20,11 @@ it("renders without crashing", () => {
   const { queryByText } = render(
     <ReactRedux.Provider store={mockStore}>
       <BrowserRouter>
-        <CollectionItem item={SHOP_DATA[0].items[0]} />
+        <CollectionItem item={SHOP_DATA.hats.items[0]} />
       </BrowserRouter>
     </ReactRedux.Provider>
   );
-  expect(queryByText(SHOP_DATA[0].items[0].name)).toBeDefined();
+  expect(queryByText(SHOP_DATA.hats.items[0].name)).toBeDefined();
 });
 
 it("should dispatch an action when addToCart handler is called", () => {

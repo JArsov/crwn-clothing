@@ -1,5 +1,5 @@
 import { ActionWithPayload } from "../storeHelper";
-import { ShopDataItem } from "../../shared/shop.data";
+import { ShopDataItem } from "../reducers/types/ShopState";
 
 export enum CartActionTypes {
   TOGGLE_CART_HIDDEN = "TOGGLE_CART_HIDDEN",

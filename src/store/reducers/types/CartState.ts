@@ -1,4 +1,4 @@
-import { ShopDataItem } from "../../../shared/shop.data";
+import { ShopDataItem } from "./ShopState";
 
 export interface CartItem extends ShopDataItem {
   quantity: number;

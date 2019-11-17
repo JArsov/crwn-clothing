@@ -2,7 +2,10 @@ import {
   CartActionTypes,
   CartActionWithPayload
 } from "../../actions/cartActions";
-import { addItemToCart, removeItemFromCart } from "../../../shared/cart.utils";
+import {
+  addItemToCart,
+  removeItemFromCart
+} from "../../../shared/cart-utils/cart.utils";
 import reducerWithActionMap, { ActionMap } from "../../storeHelper";
 
 import { CartState } from "../types/CartState";

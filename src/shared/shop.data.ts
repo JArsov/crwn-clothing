@@ -1,19 +1,16 @@
-export interface ShopData {
-  id: number;
-  title: string;
-  routeName: string;
-  items: ShopDataItem[];
+import { ShopData } from "../store/reducers/types/ShopState";
+
+export interface ShopDataCollections {
+  hats: ShopData;
+  jackets: ShopData;
+  sneakers: ShopData;
+  womens: ShopData;
+  mens: ShopData;
+  [key: string]: ShopData;
 }
 
-export interface ShopDataItem {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-}
-
-const SHOP_DATA: ShopData[] = [
-  {
+const SHOP_DATA: ShopDataCollections = {
+  hats: {
     id: 1,
     title: "Hats",
     routeName: "hats",
@@ -74,7 +71,7 @@ const SHOP_DATA: ShopData[] = [
       }
     ]
   },
-  {
+  sneakers: {
     id: 2,
     title: "Sneakers",
     routeName: "sneakers",
@@ -129,7 +126,7 @@ const SHOP_DATA: ShopData[] = [
       }
     ]
   },
-  {
+  jackets: {
     id: 3,
     title: "Jackets",
     routeName: "jackets",
@@ -166,7 +163,7 @@ const SHOP_DATA: ShopData[] = [
       }
     ]
   },
-  {
+  womens: {
     id: 4,
     title: "Womens",
     routeName: "womens",
@@ -215,7 +212,7 @@ const SHOP_DATA: ShopData[] = [
       }
     ]
   },
-  {
+  mens: {
     id: 5,
     title: "Mens",
     routeName: "mens",
@@ -258,6 +255,6 @@ const SHOP_DATA: ShopData[] = [
       }
     ]
   }
-];
+};
 
 export default SHOP_DATA;

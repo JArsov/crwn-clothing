@@ -1,6 +1,6 @@
 import CollectionItem from "../CollectionItem/CollectionItem";
 import React from "react";
-import { ShopData } from "../../shared/shop.data";
+import { ShopData } from "../../store/reducers/types/ShopState";
 import styled from "styled-components";
 
 const CollectionPreviewContainer = styled.div`

@@ -6,7 +6,7 @@ import {
   toggleCartHidden
 } from "../../actions/cartActions";
 
-import { ShopDataItem } from "../../../shared/shop.data";
+import { ShopDataItem } from "../types/ShopState";
 import cartReducer from "./cartReducer";
 
 export const mockState: CartState = {

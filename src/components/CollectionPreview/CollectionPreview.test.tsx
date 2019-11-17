@@ -8,8 +8,8 @@ import { render } from "@testing-library/react";
 it("should have 4 children under it", () => {
   const { getByTestId } = render(
     <Provider store={mockStore}>
-      <CollectionPreview {...SHOP_DATA[0]} />
+      <CollectionPreview {...SHOP_DATA.hats} />
     </Provider>
   );
-  expect(getByTestId(SHOP_DATA[0].title).children.length).toBe(4);
+  expect(getByTestId(SHOP_DATA.hats.title).children.length).toBe(4);
 });

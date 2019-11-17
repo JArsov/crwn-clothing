@@ -1,6 +1,9 @@
 import MenuItem, { MenuItemModel } from "../MenuItem/MenuItem";
+import { shallowEqual, useSelector } from "react-redux";
 
 import React from "react";
+import { RootState } from "../../store/reducers/types/RootState";
+import { selectSections } from "../../store/selectors/directory/directorySelector";
 import styled from "styled-components";
 
 const DirectoryContainer = styled.div`
@@ -10,42 +13,11 @@ const DirectoryContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const allSections: MenuItemModel[] = [
-  {
-    title: "hats",
-    imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-    id: 1,
-    linkUrl: "shop/hats"
-  },
-  {
-    title: "jackets",
-    imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-    id: 2,
-    linkUrl: "shop/jackets"
-  },
-  {
-    title: "sneakers",
-    imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-    id: 3,
-    linkUrl: "shop/sneakers"
-  },
-  {
-    title: "womens",
-    imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-    size: "large",
-    id: 4,
-    linkUrl: "shop/womens"
-  },
-  {
-    title: "mens",
-    imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
-    size: "large",
-    id: 5,
-    linkUrl: "shop/mens"
-  }
-];
-
 const Directory: React.FC<{}> = () => {
+  const allSections = useSelector<RootState, MenuItemModel[]>(
+    selectSections,
+    shallowEqual
+  );
   return (
     <DirectoryContainer>
       {allSections.map(({ id, ...rest }) => (

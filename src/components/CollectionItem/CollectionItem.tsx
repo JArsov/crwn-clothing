@@ -5,7 +5,7 @@ import {
 import React, { Dispatch } from "react";
 
 import Button from "../Button/Button";
-import { ShopDataItem } from "../../shared/shop.data";
+import { ShopDataItem } from "../../store/reducers/types/ShopState";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 
@@ -13,7 +13,7 @@ const CollectionItemContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 25rem;
-  width: 21%;
+  width: 21vw;
 `;
 
 const CollectionItemImage = styled.div<{ imageUrl: string }>`
