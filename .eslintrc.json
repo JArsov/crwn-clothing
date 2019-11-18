@@ -6,7 +6,19 @@
     "semi": [2, "always"],
     "no-var": 2,
     "spaced-comment": [2, "always"],
-    "comma-dangle": ["error", "always-multiline"]
+    "comma-dangle": ["error", "always-multiline"],
+    "space-in-brackets": [
+      "error",
+      "always",
+      {
+        "singleValue": false,
+        "objectsInArrays": false,
+        "arraysInArrays": false,
+        "arraysInObjects": false,
+        "objectsInObjects": false,
+        "propertyName": false
+      }
+    ]
   },
   "env": {
     "es6": true,
