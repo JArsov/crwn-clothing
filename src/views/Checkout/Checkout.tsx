@@ -8,6 +8,7 @@ import { CartItem } from "../../store/reducers/types/CartState";
 import CheckoutItem from "../../components/CheckoutItem/CheckoutItem";
 import React from "react";
 import { RootState } from "../../store/reducers/types/RootState";
+import StripeButton from "../../components/StripeButton/StripeButton";
 import styled from "styled-components";
 
 const CheckoutContainer = styled.div`
@@ -17,6 +18,11 @@ const CheckoutContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 3rem auto 0;
+
+  > button {
+    margin-left: auto;
+    margin-top: 3rem;
+  }
 `;
 
 const CheckoutHeader = styled.div`
@@ -40,6 +46,13 @@ const TotalPriceContainer = styled.div`
   margin-top: 1.9rem;
   margin-left: auto;
   font-size: 2.25rem;
+`;
+
+const TestCardWarningMessage = styled.div`
+  text-align: center;
+  margin-top: 2.5rem;
+  font-size: 1.5rem;
+  color: red;
 `;
 
 const Checkout: React.FC<{}> = () => {
@@ -76,6 +89,12 @@ const Checkout: React.FC<{}> = () => {
       <TotalPriceContainer>
         <span>TOTAL: ${totalPrice}</span>
       </TotalPriceContainer>
+      <TestCardWarningMessage>
+        *Please use the following test credit card for payments*
+        <br />
+        4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
+      </TestCardWarningMessage>
+      <StripeButton price={totalPrice} />
     </CheckoutContainer>
   );
 };
