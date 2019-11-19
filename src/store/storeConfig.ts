@@ -12,7 +12,7 @@ declare global {
 }
 
 const middlewares = [createLogger()];
-const isDevelopment = process.env.REACT_APP_NODE_ENV !== "production";
+const isDevelopment = process.env.NODE_ENV !== "production";
 
 const configureStore = (): Store<RootState> => {
   const appStore = isDevelopment
