@@ -36,10 +36,9 @@ const CheckoutHeader = styled.div`
 const CheckoutHeaderBlock = styled.div`
   text-transform: capitalize;
   width: 23%;
-`;
-
-const LastCheckoutHeaderBlock = styled(CheckoutHeaderBlock)`
-  width: 8%;
+  &:last-child {
+    width: 8%;
+  }
 `;
 
 const TotalPriceContainer = styled.div`
@@ -79,9 +78,9 @@ const Checkout: React.FC<{}> = () => {
         <CheckoutHeaderBlock>
           <span>Price</span>
         </CheckoutHeaderBlock>
-        <LastCheckoutHeaderBlock>
+        <CheckoutHeaderBlock>
           <span>Remove</span>
-        </LastCheckoutHeaderBlock>
+        </CheckoutHeaderBlock>
       </CheckoutHeader>
       {cartItems.map(cartItem => (
         <CheckoutItem key={cartItem.id} {...cartItem} />

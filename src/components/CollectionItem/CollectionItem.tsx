@@ -14,25 +14,53 @@ const CollectionItemContainer = styled.div`
   flex-direction: column;
   height: 25rem;
   width: 21vw;
+  align-items: center;
+  position: relative;
+  &:hover {
+    img {
+      opacity: 0.8;
+    }
+    button {
+      opacity: 0.85;
+      display: flex;
+    }
+  }
 `;
 
 const CollectionItemImage = styled.div<{ imageUrl: string }>`
   flex-grow: 1;
   background-size: cover;
   background-position: center;
+  width: 100%;
+  height: 95%;
   background-image: url(${props => props.imageUrl});
-  &:hover {
-    opacity: 0.8;
-  }
+  margin-bottom: 0.3rem;
 `;
 
 const CollectionItemFooter = styled.div`
+  width: 100%;
+  height: 5%;
   display: flex;
   justify-content: space-between;
+  font-size: 18px;
+`;
+
+const NameContainer = styled.span`
+  width: 90%;
+  margin-bottom: 15px;
+`;
+
+const PriceContainer = styled.span`
+  width: 10%;
+  text-align: right;
 `;
 
 const CollectionItemButton = styled(Button)`
+  width: 80%;
   opacity: 0.7;
+  position: absolute;
+  top: 16rem;
+  display: none;
 `;
 
 interface CollectionItemProps {
@@ -53,8 +81,8 @@ const CollectionItem: React.FC<CollectionItemProps> = ({ item }) => {
     <CollectionItemContainer>
       <CollectionItemImage imageUrl={item.imageUrl} />
       <CollectionItemFooter>
-        <span>{item.name}</span>
-        <span>{item.price}</span>
+        <NameContainer>{item.name}</NameContainer>
+        <PriceContainer>{item.price}</PriceContainer>
       </CollectionItemFooter>
       <CollectionItemButton onClick={addToCartHandler}>
         Add to cart
