@@ -13,11 +13,11 @@ export const selectCollections = createSelector(
  */
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
-  collections => Object.keys(collections).map(key => collections[key])
+  collections =>
+    collections ? Object.keys(collections).map(key => collections[key]) : null
 );
 
 export const selectCollection = (collectionUrlParam: string) =>
-  createSelector(
-    [selectCollections],
-    collections => collections[collectionUrlParam.toString()]
+  createSelector([selectCollections], collections =>
+    collections ? collections[collectionUrlParam.toString()] : null
   );

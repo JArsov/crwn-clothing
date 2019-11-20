@@ -73,7 +73,7 @@ const mockRootState: RootState = {
   shop: {
     collections: {
       hats: {
-        id: 1,
+        id: "1",
         title: "Hats",
         routeName: "hats",
         items: [
@@ -134,7 +134,7 @@ const mockRootState: RootState = {
         ]
       },
       sneakers: {
-        id: 2,
+        id: "2",
         title: "Sneakers",
         routeName: "sneakers",
         items: [
@@ -189,7 +189,7 @@ const mockRootState: RootState = {
         ]
       },
       jackets: {
-        id: 3,
+        id: "3",
         title: "Jackets",
         routeName: "jackets",
         items: [
@@ -226,7 +226,7 @@ const mockRootState: RootState = {
         ]
       },
       womens: {
-        id: 4,
+        id: "4",
         title: "Womens",
         routeName: "womens",
         items: [
@@ -275,7 +275,7 @@ const mockRootState: RootState = {
         ]
       },
       mens: {
-        id: 5,
+        id: "5",
         title: "Mens",
         routeName: "mens",
         items: [

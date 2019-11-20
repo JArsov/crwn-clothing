@@ -41,6 +41,7 @@ it("should not sign up if the email already exists", () => {
       resolve(true);
     });
   });
+
   const { getByAltText, getByText } = render(<SignUp />);
 
   act(() => {

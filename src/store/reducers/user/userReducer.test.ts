@@ -1,10 +1,11 @@
-import { UserOrNull, UserState } from "../types/UserState";
+import { User, UserState } from "../types/UserState";
 
+import { Nullable } from "../types/RootState";
 import cloneDeep from "lodash/cloneDeep";
 import { setCurrentUser } from "../../actions/userActions";
 import userReducer from "./userReducer";
 
-export const mockUser: UserOrNull = {
+export const mockUser: Nullable<User> = {
   createdAt: new Date(),
   displayName: "Mock User",
   email: "mock_user@gmail.com"
@@ -17,7 +18,7 @@ export const mockState: UserState = {
 describe("UserReducer", () => {
   it("should set the current user", () => {
     const copyOfMockState = cloneDeep(mockState);
-    const newUser: UserOrNull = null;
+    const newUser: Nullable<User> = null;
 
     const newState = userReducer(copyOfMockState, setCurrentUser(newUser));
 

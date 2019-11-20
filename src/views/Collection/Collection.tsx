@@ -1,14 +1,14 @@
+import { Nullable, RootState } from "../../store/reducers/types/RootState";
 import { shallowEqual, useSelector } from "react-redux";
 
 import CollectionItem from "../../components/CollectionItem/CollectionItem";
 import React from "react";
-import { RootState } from "../../store/reducers/types/RootState";
 import { RouteComponentProps } from "react-router";
 import { ShopData } from "../../store/reducers/types/ShopState";
 import { selectCollection } from "../../store/selectors/shop/shopSelectors";
 import styled from "styled-components";
 
-interface CollectionMatchProps {
+export interface CollectionMatchProps {
   collectionId: string;
 }
 
@@ -31,7 +31,7 @@ const CategoryItemsContainer = styled.div`
 const Category: React.FC<RouteComponentProps<CollectionMatchProps>> = ({
   match
 }) => {
-  const { title, items } = useSelector<RootState, ShopData | undefined>(
+  const { title, items } = useSelector<RootState, Nullable<ShopData>>(
     state => selectCollection(match.params.collectionId)(state),
     shallowEqual
   ) as ShopData;

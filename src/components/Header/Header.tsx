@@ -1,3 +1,4 @@
+import { Nullable, RootState } from "../../store/reducers/types/RootState";
 import { shallowEqual, useSelector } from "react-redux";
 
 import CartDropdown from "../CartDropdown/CartDropdown";
@@ -5,8 +6,7 @@ import CartIcon from "../CartIcon/CartIcon";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import React from "react";
-import { RootState } from "../../store/reducers/types/RootState";
-import { UserOrNull } from "../../store/reducers/types/UserState";
+import { User } from "../../store/reducers/types/UserState";
 import { auth } from "../../firebase/firebase.utils";
 import { selectCurrentUser } from "../../store/selectors/user/userSelectors";
 import { selectIsCartHidden } from "../../store/selectors/cart/cartSelectors";
@@ -41,7 +41,7 @@ const SignInSignOutButton = styled.div`
 `;
 
 const Header: React.FC<{}> = () => {
-  const currentUser = useSelector<RootState, UserOrNull>(
+  const currentUser = useSelector<RootState, Nullable<User>>(
     selectCurrentUser,
     shallowEqual
   );

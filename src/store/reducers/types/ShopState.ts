@@ -1,7 +1,8 @@
+import { Nullable } from "./RootState";
 import { ShopDataCollections } from "../../../shared/shop.data";
 
 export interface ShopData {
-  id: number;
+  id: string;
   title: string;
   routeName: string;
   items: ShopDataItem[];
@@ -15,5 +16,5 @@ export interface ShopDataItem {
 }
 
 export interface ShopState {
-  collections: ShopDataCollections;
+  collections: Nullable<ShopDataCollections>;
 }

@@ -1,6 +1,7 @@
 import "firebase/firestore";
 import "firebase/auth";
 
+import { ShopDataCollections } from "../shared/shop.data";
 import firebase from "firebase/app";
 
 interface FirebaseConfig {
@@ -66,6 +67,47 @@ export const createUserProfileDocument = async (
   }
 
   return userRef;
+};
+
+/**
+ * a generic method that can be used for all collections and documents that should be added in firebase
+ * @param collectionKey - the key under which the collection should be saved
+ * @param objectsToAdd - the collection documents (that's why they are of type any)
+ */
+export const addCollectionAndDocuments = async (
+  collectionKey: string,
+  objectsToAdd: any
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+
+  const batch = firestore.batch();
+  objectsToAdd.forEach((shopData: any) => {
+    const newShopDataRef = collectionRef.doc();
+    batch.set(newShopDataRef, shopData);
+  });
+
+  return await batch.commit();
+};
+
+export const convertCollectionsSnapshopToMap = (
+  collections: firebase.firestore.QuerySnapshot
+) => {
+  const transformedCollection = collections.docs.map(doc => {
+    const { title, items } = doc.data();
+    const shopDataObject = {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items
+    };
+    return shopDataObject;
+  });
+  return transformedCollection.reduce((accumulator, collection) => {
+    (accumulator as ShopDataCollections)[
+      collection.title.toLowerCase()
+    ] = collection;
+    return accumulator;
+  }, {});
 };
 
 firebase.initializeApp(config);

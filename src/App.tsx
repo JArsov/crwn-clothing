@@ -1,3 +1,4 @@
+import { Nullable, RootState } from "./store/reducers/types/RootState";
 import React, { Dispatch, useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import {
@@ -10,10 +11,9 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import Checkout from "./views/Checkout/Checkout";
 import Header from "./components/Header/Header";
 import Home from "./views/Home/Home";
-import { RootState } from "./store/reducers/types/RootState";
 import Shop from "./views/Shop/Shop";
 import SignInSignUp from "./views/SignInSignUp/SignInSignUp";
-import { UserOrNull } from "./store/reducers/types/UserState";
+import { User } from "./store/reducers/types/UserState";
 import { selectCurrentUser } from "./store/selectors/user/userSelectors";
 import styled from "styled-components";
 
@@ -32,7 +32,7 @@ const AppContainer = styled.div`
 
 const App: React.FC<{}> = () => {
   const dispatch = useDispatch<Dispatch<UserActionWithPayload>>();
-  const currentUser = useSelector<RootState, UserOrNull>(
+  const currentUser = useSelector<RootState, Nullable<User>>(
     selectCurrentUser,
     shallowEqual
   );

@@ -1,5 +1,6 @@
 import { ActionWithPayload } from "../storeHelper";
-import { UserOrNull } from "../reducers/types/UserState";
+import { Nullable } from "../reducers/types/RootState";
+import { User } from "../reducers/types/UserState";
 
 export enum UserActionTypes {
   SET_CURRENT_USER = "SET_CURRENT_USER"
@@ -10,7 +11,7 @@ export type UserActionWithPayload<P = any> = ActionWithPayload<
   P
 >;
 
-export const setCurrentUser = (user: UserOrNull) => ({
+export const setCurrentUser = (user: Nullable<User>) => ({
   type: UserActionTypes.SET_CURRENT_USER,
   payload: {
     currentUser: user
