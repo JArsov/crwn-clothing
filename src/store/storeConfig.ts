@@ -4,6 +4,7 @@ import { RootState } from "./reducers/types/RootState";
 import { createLogger } from "redux-logger";
 import { persistStore } from "redux-persist";
 import rootReducer from "./reducers/rootReducer";
+import thunk from "redux-thunk";
 
 declare global {
   interface Window {
@@ -11,7 +12,7 @@ declare global {
   }
 }
 
-const middlewares = [createLogger()];
+const middlewares = [thunk, createLogger()];
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 const configureStore = (): Store<RootState> => {

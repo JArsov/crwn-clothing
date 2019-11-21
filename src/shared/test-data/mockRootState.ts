@@ -71,6 +71,8 @@ const mockRootState: RootState = {
     ]
   },
   shop: {
+    errorMessage: "",
+    isFetching: false,
     collections: {
       hats: {
         id: "1",

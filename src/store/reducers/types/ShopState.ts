@@ -17,4 +17,6 @@ export interface ShopDataItem {
 
 export interface ShopState {
   collections: Nullable<ShopDataCollections>;
+  isFetching: boolean;
+  errorMessage: string;
 }

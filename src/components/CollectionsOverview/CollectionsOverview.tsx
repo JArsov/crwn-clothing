@@ -24,7 +24,6 @@ const CollectionsOverview: React.FC<{}> = () => {
             <CollectionPreview key={collection.id} {...collection} />
           ))
         : null}
-      ); }
     </CollectionsOverviewContainer>
   );
 };

@@ -8,27 +8,45 @@ import { Reducer } from "redux";
 import { ShopState } from "../types/ShopState";
 
 export const initialState: ShopState = {
-  collections: null
+  collections: null,
+  isFetching: false,
+  errorMessage: ""
 };
 
 type ShopReducer = Reducer<ShopState, ShopActionWithPayload>;
 
-const fetchAllShopData: ShopReducer = state => {
-  const shopState = state as ShopState;
-  return shopState;
-};
-
-const updateCollections: ShopReducer = (state, action) => {
+const fetchCollectionsStart: ShopReducer = state => {
   const shopState = state as ShopState;
   return {
     ...shopState,
-    collections: action.payload.collections
+    isFetching: true
+  };
+};
+
+const fetchCollectionsSuccess: ShopReducer = (state, action) => {
+  const shopState = state as ShopState;
+  return {
+    ...shopState,
+    isFetching: false,
+    collections: action.payload.collections,
+    errorMessage: ""
+  };
+};
+
+const fetchCollectionsFailure: ShopReducer = (state, action) => {
+  const shopState = state as ShopState;
+  return {
+    ...shopState,
+    isFetching: false,
+    collections: null,
+    errorMessage: action.payload.errorMessage
   };
 };
 
 const actionMap: ActionMap<ShopState, ShopActionWithPayload> = {
-  [ShopActionTypes.FETCH_ALL_SHOP_DATA]: fetchAllShopData,
-  [ShopActionTypes.UPDATE_COLLECTIONS]: updateCollections
+  [ShopActionTypes.FETCH_COLLECTIONS_START]: fetchCollectionsStart,
+  [ShopActionTypes.FETCH_COLLECTIONS_SUCCESS]: fetchCollectionsSuccess,
+  [ShopActionTypes.FETCH_COLLECTIONS_FAILURE]: fetchCollectionsFailure
 };
 
 export default reducerWithActionMap(actionMap, initialState);

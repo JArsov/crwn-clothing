@@ -1,19 +1,17 @@
 import Collection, { CollectionMatchProps } from "../Collection/Collection";
-import React, { Dispatch, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
-  ShopActionTypes,
-  ShopActionWithPayload
-} from "../../store/actions/shopActions";
-import {
-  convertCollectionsSnapshopToMap,
-  firestore
-} from "../../firebase/firebase.utils";
+  selectIsCollectionFetching,
+  selectIsCollectionsLoaded
+} from "../../store/selectors/shop/shopSelectors";
+import { useDispatch, useSelector } from "react-redux";
 
 import CollectionsOverview from "../../components/CollectionsOverview/CollectionsOverview";
+import { RootState } from "../../store/reducers/types/RootState";
 import { Route } from "react-router-dom";
 import { RouteComponentProps } from "react-router";
 import WithSpinner from "../../components/WithSpinner/WithSpinner";
-import { useDispatch } from "react-redux";
+import { fetchCollectionsStartAsync } from "../../store/actions/shopActions";
 
 const CollectionsOverviewWithSpinner = WithSpinner<{}>(CollectionsOverview);
 const CollectionWithSpinner = WithSpinner<
@@ -21,30 +19,17 @@ const CollectionWithSpinner = WithSpinner<
 >(Collection);
 
 const Shop: React.FC<RouteComponentProps> = ({ match }) => {
-  const dispatch = useDispatch<Dispatch<ShopActionWithPayload>>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const dispatch = useDispatch();
+  const isCollectionsLoaded = useSelector<RootState, boolean>(
+    selectIsCollectionsLoaded
+  );
+  const isCollectionFetching = useSelector<RootState, boolean>(
+    selectIsCollectionFetching
+  );
+
   useEffect(() => {
-    let unsubscribeFromFirestore: firebase.Unsubscribe | null = null;
-    const collectionRef = firestore.collection("collections");
-
-    unsubscribeFromFirestore = collectionRef.onSnapshot(async snapshot => {
-      const collectionsMap = convertCollectionsSnapshopToMap(snapshot);
-      dispatch({
-        type: ShopActionTypes.UPDATE_COLLECTIONS,
-        payload: {
-          collections: collectionsMap
-        }
-      });
-      setIsLoading(false);
-    });
-
-    // Unsubscribe from Firestore
-    return () => {
-      if (unsubscribeFromFirestore) {
-        unsubscribeFromFirestore();
-      }
-    };
-  }, [dispatch, isLoading]);
+    dispatch(fetchCollectionsStartAsync());
+  }, [dispatch]);
 
   return (
     <div>
@@ -52,13 +37,16 @@ const Shop: React.FC<RouteComponentProps> = ({ match }) => {
         path={match.path}
         exact
         render={props => (
-          <CollectionsOverviewWithSpinner isLoading={isLoading} {...props} />
+          <CollectionsOverviewWithSpinner
+            isLoading={isCollectionFetching}
+            {...props}
+          />
         )}
       />
       <Route
         path={`${match.path}/:collectionId`}
         render={props => (
-          <CollectionWithSpinner isLoading={isLoading} {...props} />
+          <CollectionWithSpinner isLoading={!isCollectionsLoaded} {...props} />
         )}
       />
     </div>
