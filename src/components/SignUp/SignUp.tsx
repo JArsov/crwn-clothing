@@ -1,13 +1,15 @@
-import React, { FormEvent, useState } from "react";
+import React, { Dispatch, FormEvent } from "react";
 import {
-  auth,
-  createUserProfileDocument,
-  doesEmailExist
-} from "../../firebase/firebase.utils";
+  UserActionWithPayload,
+  signUpStart
+} from "../../store/actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
 
 import Button from "../Button/Button";
 import { ErrorMessage } from "../StyledComponents/StyledComponents";
 import FormInput from "../FormInput/FormInput";
+import { RootState } from "../../store/reducers/types/RootState";
+import { selectUserErrorMessage } from "../../store/selectors/user/userSelectors";
 import styled from "styled-components";
 import useFormInput from "../../shared/useFormInput";
 
@@ -34,40 +36,22 @@ export const SignUp: React.FC<{}> = () => {
   const email = useFormInput<string>("");
   const password = useFormInput<string>("");
   const confirmPassword = useFormInput<string>("");
-  const [emailExistsErrorMessage, setEmailExistsErrorMessage] = useState<
-    string
-  >("");
+  const userErrorMessage = useSelector<RootState, string>(
+    selectUserErrorMessage
+  );
+  const dispatch = useDispatch<Dispatch<UserActionWithPayload>>();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    setEmailExistsErrorMessage("");
     event.preventDefault();
 
-    if (password.value !== confirmPassword.value) {
-      setEmailExistsErrorMessage("Passwords do not match!");
-      return;
-    }
-
-    const emailExists = await doesEmailExist(email.value);
-
-    if (emailExists) {
-      setEmailExistsErrorMessage("Email address already exists!");
-      return;
-    }
-
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email.value,
-        password.value
-      );
-      await createUserProfileDocument(user, { displayName: displayName.value });
-
-      displayName.setValue("");
-      email.setValue("");
-      password.setValue("");
-      confirmPassword.setValue("");
-    } catch (error) {
-      setEmailExistsErrorMessage("An error occured during sign up");
-    }
+    dispatch(
+      signUpStart({
+        email: email.value,
+        password: password.value,
+        confirmPassword: confirmPassword.value,
+        displayName: displayName.value
+      })
+    );
   };
   return (
     <SignUpContainer>
@@ -108,7 +92,7 @@ export const SignUp: React.FC<{}> = () => {
         />
         <SignUpButton type="submit">SIGN UP</SignUpButton>
       </SignUpForm>
-      <ErrorMessage>{emailExistsErrorMessage}</ErrorMessage>
+      <ErrorMessage>{userErrorMessage}</ErrorMessage>
     </SignUpContainer>
   );
 };

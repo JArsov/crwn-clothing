@@ -2,11 +2,17 @@ import * as firebaseUtils from "../../firebase/firebase.utils";
 
 import { act, fireEvent, render } from "@testing-library/react";
 
+import { Provider } from "react-redux";
 import React from "react";
 import SignUp from "./SignUp";
+import { store as mockStore } from "../../store/storeConfig";
 
 it("should check if an 'Passwords do not match' error message appears", () => {
-  const { getByAltText, getByText } = render(<SignUp />);
+  const { getByAltText, getByText } = render(
+    <Provider store={mockStore}>
+      <SignUp />
+    </Provider>
+  );
 
   act(() => {
     fireEvent.change(getByAltText("displayName"), {
@@ -42,7 +48,11 @@ it("should not sign up if the email already exists", () => {
     });
   });
 
-  const { getByAltText, getByText } = render(<SignUp />);
+  const { getByAltText, getByText } = render(
+    <Provider store={mockStore}>
+      <SignUp />
+    </Provider>
+  );
 
   act(() => {
     fireEvent.change(getByAltText("email"), {

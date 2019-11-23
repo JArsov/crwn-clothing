@@ -52,11 +52,20 @@ const clearItem: CartReducer = (state, action) => {
   };
 };
 
+const clearCart: CartReducer = (state, _) => {
+  const cartState = state as CartState;
+  return {
+    ...cartState,
+    cartItems: []
+  };
+};
+
 const actionMap: ActionMap<CartState, CartActionWithPayload> = {
   [CartActionTypes.TOGGLE_CART_HIDDEN]: toggleCartHidden,
   [CartActionTypes.ADD_ITEM]: addItem,
   [CartActionTypes.REMOVE_ITEM]: removeItem,
-  [CartActionTypes.CLEAR_ITEM]: clearItem
+  [CartActionTypes.CLEAR_ITEM]: clearItem,
+  [CartActionTypes.CLEAR_CART]: clearCart
 };
 
 export default reducerWithActionMap(actionMap, initialState);

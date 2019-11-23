@@ -18,3 +18,8 @@ export const selectEmail = createSelector(
   [selectCurrentUser],
   currentUser => currentUser.email
 );
+
+export const selectUserErrorMessage = createSelector(
+  [selectUser],
+  user => user.errorMessage
+);

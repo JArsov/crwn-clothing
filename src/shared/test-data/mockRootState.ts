@@ -32,7 +32,8 @@ const mockRootState: RootState = {
       createdAt: new Date(),
       displayName: "Display Name",
       email: "email@email.com"
-    }
+    },
+    errorMessage: ''
   },
   directory: {
     sections: [

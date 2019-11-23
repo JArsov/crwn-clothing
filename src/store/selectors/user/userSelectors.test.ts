@@ -1,7 +1,8 @@
 import {
   selectCurrentUser,
   selectDisplayName,
-  selectEmail
+  selectEmail,
+  selectUserErrorMessage
 } from "./userSelectors";
 
 import { User } from "../../reducers/types/UserState";
@@ -24,5 +25,9 @@ describe("User selectors", () => {
     expect(selectEmail(mockRootState)).toEqual(
       (mockRootState.user.currentUser as User).email
     );
+  });
+
+  it('should select the error message from the user state', () => {
+    expect(selectUserErrorMessage(mockRootState)).toBeFalsy();
   });
 });

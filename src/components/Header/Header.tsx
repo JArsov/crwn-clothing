@@ -1,13 +1,16 @@
 import { Nullable, RootState } from "../../store/reducers/types/RootState";
-import { shallowEqual, useSelector } from "react-redux";
+import React, { Dispatch } from "react";
+import {
+  UserActionWithPayload,
+  signOutStart
+} from "../../store/actions/userActions";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 import CartDropdown from "../CartDropdown/CartDropdown";
 import CartIcon from "../CartIcon/CartIcon";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-import React from "react";
 import { User } from "../../store/reducers/types/UserState";
-import { auth } from "../../firebase/firebase.utils";
 import { selectCurrentUser } from "../../store/selectors/user/userSelectors";
 import { selectIsCartHidden } from "../../store/selectors/cart/cartSelectors";
 import styled from "styled-components";
@@ -41,6 +44,7 @@ const SignInSignOutButton = styled.div`
 `;
 
 const Header: React.FC<{}> = () => {
+  const dispatch = useDispatch<Dispatch<UserActionWithPayload>>();
   const currentUser = useSelector<RootState, Nullable<User>>(
     selectCurrentUser,
     shallowEqual
@@ -51,7 +55,7 @@ const Header: React.FC<{}> = () => {
   );
 
   const handleSignOutClick = () => {
-    auth.signOut();
+    dispatch(signOutStart());
   };
 
   return (

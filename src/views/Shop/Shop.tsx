@@ -11,7 +11,7 @@ import { RootState } from "../../store/reducers/types/RootState";
 import { Route } from "react-router-dom";
 import { RouteComponentProps } from "react-router";
 import WithSpinner from "../../components/WithSpinner/WithSpinner";
-import { fetchCollectionsStartAsync } from "../../store/actions/shopActions";
+import { fetchCollectionsStart } from "../../store/actions/shopActions";
 
 const CollectionsOverviewWithSpinner = WithSpinner<{}>(CollectionsOverview);
 const CollectionWithSpinner = WithSpinner<
@@ -28,7 +28,7 @@ const Shop: React.FC<RouteComponentProps> = ({ match }) => {
   );
 
   useEffect(() => {
-    dispatch(fetchCollectionsStartAsync());
+    dispatch(fetchCollectionsStart());
   }, [dispatch]);
 
   return (

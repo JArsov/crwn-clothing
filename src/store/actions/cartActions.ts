@@ -5,7 +5,8 @@ export enum CartActionTypes {
   TOGGLE_CART_HIDDEN = "TOGGLE_CART_HIDDEN",
   ADD_ITEM = "ADD_ITEM",
   REMOVE_ITEM = "REMOVE_ITEM",
-  CLEAR_ITEM = "CLEAR_ITEM"
+  CLEAR_ITEM = "CLEAR_ITEM",
+  CLEAR_CART = "CLEAR_CART"
 }
 
 export type CartActionWithPayload<P = any> = ActionWithPayload<
@@ -36,4 +37,8 @@ export const clearItem = (item: ShopDataItem): CartActionWithPayload => ({
   payload: {
     item
   }
+});
+
+export const clearCart = (): CartActionWithPayload => ({
+  type: CartActionTypes.CLEAR_CART
 });

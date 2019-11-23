@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render, waitForElement } from "@testing-library/react";
 
 import { Provider } from "react-redux";
 import React from "react";
@@ -6,25 +6,32 @@ import SignIn from "./SignIn";
 import { auth } from "../../firebase/firebase.utils";
 import { store as mockStore } from "../../store/storeConfig";
 
-it("should check if an error message appears when the credentials are invalid", () => {
-  jest.spyOn(auth, "signInWithEmailAndPassword").mockImplementationOnce(() => {
-    throw new Error();
-  });
-  const { getByLabelText, getByText } = render(
+it("should check if an error message appears when the credentials are invalid", async () => {
+  jest
+    .spyOn(auth, "signInWithEmailAndPassword")
+    .mockImplementationOnce((email, password) => {
+      throw new Error(
+        "The password is invalid or the user does not have a password."
+      );
+    });
+  const { getByLabelText, getByText, getByTestId } = render(
     <Provider store={mockStore}>
       <SignIn />
     </Provider>
   );
-
-  fireEvent.change(getByLabelText("Email"), {
-    currentTarget: { value: "orce.arsov@yasdasd.com" }
+  act(() => {
+    fireEvent.change(getByLabelText("Email"), {
+      currentTarget: { value: "orce.arsov@yasdasd.com" }
+    });
+    fireEvent.change(getByLabelText("Password"), {
+      currentTarget: { value: "whateveasdasdasdr" }
+    });
+    fireEvent.click(getByText("Sign in"));
   });
-  fireEvent.change(getByLabelText("Password"), {
-    currentTarget: { value: "whatever" }
-  });
-  fireEvent.click(getByText("Sign in"));
 
-  expect(getByText("Incorrect username/password combination")).toBeDefined();
+  expect(
+    getByTestId("sign-in-error-message-label").innerHTML.length
+  ).toBeGreaterThan(0);
 });
 
 it("should successfully log in the user if correct credentials have been put", () => {
@@ -40,7 +47,11 @@ it("should successfully log in the user if correct credentials have been put", (
     });
   });
 
-  const { getByLabelText, getByText } = render(<SignIn />);
+  const { getByLabelText, getByText } = render(
+    <Provider store={mockStore}>
+      <SignIn />
+    </Provider>
+  );
   fireEvent.change(getByLabelText("Email"), {
     currentTarget: { value: "orce.arsov@yasdasd.com" }
   });

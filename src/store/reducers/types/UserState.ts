@@ -8,4 +8,5 @@ export interface User {
 
 export interface UserState {
   currentUser: Nullable<User>;
+  errorMessage: string;
 }

@@ -1,13 +1,17 @@
-import React, { FormEvent, useState } from "react";
+import React, { Dispatch, FormEvent, useState } from "react";
 import {
-  auth,
-  signInWithFacebook,
-  signInWithGoogle
-} from "../../firebase/firebase.utils";
+  UserActionWithPayload,
+  emailSignInStart,
+  facebookSignInStart,
+  googleSignInStart
+} from "../../store/actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
 
 import Button from "../Button/Button";
 import { ErrorMessage } from "../StyledComponents/StyledComponents";
 import FormInput from "../FormInput/FormInput";
+import { RootState } from "../../store/reducers/types/RootState";
+import { selectUserErrorMessage } from "../../store/selectors/user/userSelectors";
 import styled from "styled-components";
 import useFormInput from "../../shared/useFormInput";
 
@@ -42,21 +46,26 @@ const SignInButton = styled(Button)`
 `;
 
 const SignIn: React.FC<{}> = () => {
+  const dispatch = useDispatch<Dispatch<UserActionWithPayload>>();
   const email = useFormInput<string>("");
   const password = useFormInput<string>("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const userErrorMessage = useSelector<RootState, string>(
+    selectUserErrorMessage
+  );
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const signInWithGoogleHandler = () => {
+    dispatch(googleSignInStart());
+  };
+
+  const signInWithFacebookHandler = () => {
+    dispatch(facebookSignInStart());
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    try {
-      await auth.signInWithEmailAndPassword(email.value, password.value);
-      email.setValue("");
-      password.setValue("");
-      setErrorMessage("");
-    } catch (error) {
-      setErrorMessage("Incorrect username/password combination");
-    }
+    dispatch(
+      emailSignInStart({ email: email.value, password: password.value })
+    );
   };
 
   return (
@@ -84,15 +93,25 @@ const SignIn: React.FC<{}> = () => {
         <SignInButton type="submit">Sign in</SignInButton>
         <OrLabel>or...</OrLabel>
         <ButtonsContainer>
-          <Button onClick={signInWithGoogle} isGoogleSignIn={true}>
+          <Button
+            type="button"
+            onClick={signInWithGoogleHandler}
+            isGoogleSignIn={true}
+          >
             Sign in with Google
           </Button>
-          <Button onClick={signInWithFacebook} isFacebookSignIn={true}>
+          <Button
+            type="button"
+            onClick={signInWithFacebookHandler}
+            isFacebookSignIn={true}
+          >
             Sign in with Facebook
           </Button>
         </ButtonsContainer>
       </FormContainer>
-      <ErrorMessage>{errorMessage}</ErrorMessage>
+      <ErrorMessage data-testid="sign-in-error-message-label">
+        {userErrorMessage}
+      </ErrorMessage>
     </SignInContainer>
   );
 };

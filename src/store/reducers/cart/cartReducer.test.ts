@@ -1,6 +1,7 @@
 import { CartItem, CartState } from "../types/CartState";
 import {
   addItem,
+  clearCart,
   clearItem,
   removeItem,
   toggleCartHidden
@@ -116,5 +117,12 @@ describe("CartReducer", () => {
     const newState = cartReducer(mockState, clearItem(itemToBeCleared));
 
     expect(newState.cartItems.length).toBe(mockState.cartItems.length - 1);
+  });
+
+  it('should clear the cart', () => {
+    mockState.cartItems = mockCartItems;
+    const newState = cartReducer(mockState, clearCart());
+
+    expect(newState.cartItems.length).toBe(0);
   });
 });

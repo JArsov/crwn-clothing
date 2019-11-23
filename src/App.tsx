@@ -2,10 +2,9 @@ import { Nullable, RootState } from "./store/reducers/types/RootState";
 import React, { Dispatch, useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import {
-  UserActionTypes,
-  UserActionWithPayload
+  UserActionWithPayload,
+  checkUserSession
 } from "./store/actions/userActions";
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 import Checkout from "./views/Checkout/Checkout";
@@ -37,44 +36,9 @@ const App: React.FC<{}> = () => {
     shallowEqual
   );
 
-  const currentUserOrEmail = currentUser ? currentUser.email : currentUser;
-
   useEffect(() => {
-    let unsubscribeFromAuth: firebase.Unsubscribe | null = null;
-    unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        if (userRef) {
-          userRef.onSnapshot(snapshot => {
-            if (snapshot) {
-              const userFromSnapshot = {
-                id: snapshot.id,
-                ...snapshot.data()
-              };
-              if (userFromSnapshot.id) {
-                dispatch({
-                  type: UserActionTypes.SET_CURRENT_USER,
-                  payload: { currentUser: snapshot.data() }
-                });
-              }
-            }
-          });
-        }
-      } else {
-        dispatch({
-          type: UserActionTypes.SET_CURRENT_USER,
-          payload: { currentUser: null }
-        });
-      }
-    });
-
-    // Unsubscribe from Auth
-    return () => {
-      if (unsubscribeFromAuth) {
-        unsubscribeFromAuth();
-      }
-    };
-  }, [currentUserOrEmail, dispatch]);
+    dispatch(checkUserSession());
+  }, [dispatch]);
 
   return (
     <AppContainer>
