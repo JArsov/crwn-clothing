@@ -68,6 +68,10 @@ const MenuItemContainer = styled.div<{ size?: string }>`
   &:hover ${MenuItemContentContainer} {
     opacity: 0.9;
   }
+
+  @media screen and (max-width: 800px) {
+    height: 12.5rem;
+  }
 `;
 
 export interface MenuItemModel {

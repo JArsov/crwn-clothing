@@ -11,11 +11,15 @@ import { useDispatch } from "react-redux";
 const CheckoutItemContainer = styled.div`
   width: 100%;
   display: flex;
-  min-height: 100px;
+  min-height: 6.25rem;
   border-bottom: 1px solid darkgrey;
   padding: 1rem 0;
   font-size: 1.25rem;
   align-items: center;
+
+  @media screen and (max-width: 800px) {
+    font-size: 1.125rem;
+  }
 `;
 
 const CheckoutItemImageContainer = styled.div`
@@ -33,13 +37,16 @@ const ColumnContainer = styled.span`
 `;
 
 const QuantityColumnContainer = styled(ColumnContainer)`
-  padding-left: 1.25rem;
   display: flex;
 `;
 
 const RemoveButtonContainer = styled.span`
   padding-left: 0.75rem;
   cursor: pointer;
+
+  @media screen and (max-width: 800px) {
+    padding-left: 0;
+  }
 `;
 
 const QuantityArrowContainer = styled.div`
@@ -100,7 +107,7 @@ const CheckoutItem: React.FC<CartItem> = cartItem => {
           &#10095;
         </QuantityArrowContainer>
       </QuantityColumnContainer>
-      <ColumnContainer>{price}</ColumnContainer>
+      <ColumnContainer>${price}</ColumnContainer>
       <RemoveButtonContainer
         data-testid={`clear-item-${name}`}
         onClick={clearItemHandler}

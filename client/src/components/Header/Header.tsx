@@ -20,6 +20,11 @@ const HeaderContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   height: 5rem;
+
+  @media screen and (max-width: 800px) {
+    height: 4rem;
+    padding: 0.7rem;
+  }
 `;
 
 const LogoContainer = styled(Link)`
@@ -31,7 +36,6 @@ const HeaderOptionsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 50%;
 `;
 
 const HeaderOptionsLink = styled(Link)`

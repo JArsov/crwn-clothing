@@ -6,7 +6,6 @@ const StyledButton = styled.button`
   width: auto;
   height: 3rem;
   letter-spacing: 0.1rem;
-  line-height: 3rem;
   padding: 0 2rem;
   font-size: 1rem;
   background-color: black;
@@ -16,11 +15,16 @@ const StyledButton = styled.button`
   font-weight: bolder;
   border: none;
   cursor: pointer;
+  white-space: normal;
 
   &:hover {
     background-color: white;
     color: black;
     border: 1px solid black;
+  }
+
+  @media screen and (max-width: 800px) {
+    font-size: 0.75rem;
   }
 `;
 

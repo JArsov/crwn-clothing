@@ -25,6 +25,16 @@ const CollectionItemContainer = styled.div`
       display: flex;
     }
   }
+
+  @media screen and (max-width: 800px) {
+    width: 40vw;
+    &:hover {
+      img,
+      button {
+        opacity: unset;
+      }
+    }
+  }
 `;
 
 const CollectionItemImage = styled.div<{ imageUrl: string }>`
@@ -61,6 +71,13 @@ const CollectionItemButton = styled(Button)`
   position: absolute;
   top: 16rem;
   display: none;
+
+  @media screen and (max-width: 800px) {
+    display: block;
+    opacity: 0.9;
+    min-width: unset;
+    padding: 0 0.7rem;
+  }
 `;
 
 interface CollectionItemProps {

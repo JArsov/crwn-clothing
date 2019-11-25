@@ -7,6 +7,10 @@ const CollectionPreviewContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
+
+  @media screen and (max-width: 800px) {
+    align-items: center;
+  }
 `;
 
 const CollectionPreviewTitle = styled.h1`
@@ -17,6 +21,12 @@ const CollectionPreviewTitle = styled.h1`
 const PreviewContainer = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media screen and (max-width: 800px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+  }
 `;
 
 const CollectionPreview: React.FC<ShopData> = ({ title, items }) => {

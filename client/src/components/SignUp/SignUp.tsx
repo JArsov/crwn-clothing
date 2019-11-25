@@ -17,6 +17,10 @@ const SignUpContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 32rem;
+
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 const SignUpTitle = styled.h2`
@@ -29,6 +33,7 @@ const SignUpForm = styled.form`
 
 const SignUpButton = styled(Button)`
   margin-top: 1rem;
+  width: 100%;
 `;
 
 export const SignUp: React.FC<{}> = () => {

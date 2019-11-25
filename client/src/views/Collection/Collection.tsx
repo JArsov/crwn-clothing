@@ -26,6 +26,14 @@ const CategoryItemsContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 0.7rem;
   margin-bottom: 1.9rem;
+
+  & > div {
+    margin-bottom: 1.875rem;
+  }
+  @media screen and (max-width: 800px) {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+  }
 `;
 
 const Category: React.FC<RouteComponentProps<CollectionMatchProps>> = ({

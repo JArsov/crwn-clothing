@@ -8,6 +8,15 @@ const SignInSignUpContainer = styled.div`
   justify-content: space-between;
   margin: 2rem auto;
   width: 80%;
+
+  @media screen and (max-width: 800px) {
+    width: unset;
+    flex-direction: column;
+    align-items: center;
+    > *:first-child {
+      margin-bottom: 3rem;
+    }
+  }
 `;
 
 const SignInSignUp: React.FC<{}> = () => {

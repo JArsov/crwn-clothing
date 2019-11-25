@@ -8,26 +8,13 @@ import {
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 import Checkout from "./views/Checkout/Checkout";
+import { GlobalStyle } from "./global.style";
 import Header from "./components/Header/Header";
 import Home from "./views/Home/Home";
 import Shop from "./views/Shop/Shop";
 import SignInSignUp from "./views/SignInSignUp/SignInSignUp";
 import { User } from "./store/reducers/types/UserState";
 import { selectCurrentUser } from "./store/selectors/user/userSelectors";
-import styled from "styled-components";
-
-const AppContainer = styled.div`
-  padding: 2rem 4rem;
-
-  & a {
-    color: black;
-    text-decoration: none;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-`;
 
 const App: React.FC<{}> = () => {
   const dispatch = useDispatch<Dispatch<UserActionWithPayload>>();
@@ -41,7 +28,8 @@ const App: React.FC<{}> = () => {
   }, [dispatch]);
 
   return (
-    <AppContainer>
+    <div>
+      <GlobalStyle />
       <Header />
       <Switch>
         <Route path="/" exact component={Home} />
@@ -53,7 +41,7 @@ const App: React.FC<{}> = () => {
           render={() => (currentUser ? <Redirect to="/" /> : <SignInSignUp />)}
         />
       </Switch>
-    </AppContainer>
+    </div>
   );
 };
 
