@@ -1,4 +1,4 @@
-import { Store, applyMiddleware, createStore } from "redux";
+import { Middleware, Store, applyMiddleware, createStore } from "redux";
 
 import { RootState } from "./reducers/types/RootState";
 import { createLogger } from "redux-logger";
@@ -15,20 +15,17 @@ declare global {
 
 const sagaMiddleware = createSagaMiddleware();
 
-const middlewares = [sagaMiddleware, createLogger()];
+const middlewares: Middleware[] = [sagaMiddleware];
 const isDevelopment = process.env.NODE_ENV !== "production";
+if (isDevelopment) {
+  middlewares.push(createLogger());
+}
 const configureStore = (): Store<RootState> => {
-  const appStore = isDevelopment
-    ? applyMiddleware(...middlewares)(createStore)(
-      rootReducer,
-      window.__REDUX_DEVTOOLS_EXTENSION__ &&
-      window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
-    : createStore(
-      rootReducer,
-      window.__REDUX_DEVTOOLS_EXTENSION__ &&
-      window.__REDUX_DEVTOOLS_EXTENSION__()
-    );
+  const appStore = applyMiddleware(...middlewares)(createStore)(
+    rootReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
   return appStore;
 };
 
