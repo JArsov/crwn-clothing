@@ -17,12 +17,15 @@ const sagaMiddleware = createSagaMiddleware();
 
 const middlewares: Middleware[] = [sagaMiddleware];
 const isDevelopment = process.env.NODE_ENV !== "production";
+if (isDevelopment) {
+  middlewares.push(createLogger());
+}
 const configureStore = (): Store<RootState> => {
-  const appStore = isDevelopment ? applyMiddleware(...middlewares, createLogger())(createStore)(
+  const appStore = applyMiddleware(...middlewares)(createStore)(
     rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ &&
     window.__REDUX_DEVTOOLS_EXTENSION__()
-  ) : createStore(rootReducer, applyMiddleware(...middlewares));
+  );
   return appStore;
 };
 
