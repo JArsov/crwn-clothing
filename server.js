@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(port, "0.0.0.0", error => {
+app.listen(port, error => {
   if (error) {
     throw error;
   }
