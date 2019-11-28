@@ -1,31 +1,18 @@
-import Collection, { CollectionMatchProps } from "../Collection/Collection";
-import React, { useEffect } from "react";
-import {
-  selectIsCollectionFetching,
-  selectIsCollectionsLoaded
-} from "../../store/selectors/shop/shopSelectors";
-import { useDispatch, useSelector } from "react-redux";
+import React, { Suspense, lazy, useEffect } from "react";
 
-import CollectionsOverview from "../../components/CollectionsOverview/CollectionsOverview";
-import { RootState } from "../../store/reducers/types/RootState";
 import { Route } from "react-router-dom";
 import { RouteComponentProps } from "react-router";
-import WithSpinner from "../../components/WithSpinner/WithSpinner";
+import Spinner from "../../components/Spinner/Spinner";
 import { fetchCollectionsStart } from "../../store/actions/shopActions";
+import { useDispatch } from "react-redux";
 
-const CollectionsOverviewWithSpinner = WithSpinner<{}>(CollectionsOverview);
-const CollectionWithSpinner = WithSpinner<
-  RouteComponentProps<CollectionMatchProps>
->(Collection);
+const CollectionsOverviewWithSpinner = lazy(() =>
+  import("../../components/CollectionsOverview/CollectionsOverview")
+);
+const CollectionWithSpinner = lazy(() => import("../Collection/Collection"));
 
 const Shop: React.FC<RouteComponentProps> = ({ match }) => {
   const dispatch = useDispatch();
-  const isCollectionsLoaded = useSelector<RootState, boolean>(
-    selectIsCollectionsLoaded
-  );
-  const isCollectionFetching = useSelector<RootState, boolean>(
-    selectIsCollectionFetching
-  );
 
   useEffect(() => {
     dispatch(fetchCollectionsStart());
@@ -33,22 +20,17 @@ const Shop: React.FC<RouteComponentProps> = ({ match }) => {
 
   return (
     <div>
-      <Route
-        path={match.path}
-        exact
-        render={props => (
-          <CollectionsOverviewWithSpinner
-            isLoading={isCollectionFetching}
-            {...props}
-          />
-        )}
-      />
-      <Route
-        path={`${match.path}/:collectionId`}
-        render={props => (
-          <CollectionWithSpinner isLoading={!isCollectionsLoaded} {...props} />
-        )}
-      />
+      <Suspense fallback={<Spinner />}>
+        <Route
+          path={match.path}
+          exact
+          component={CollectionsOverviewWithSpinner}
+        />
+        <Route
+          path={`${match.path}/:collectionId`}
+          component={CollectionWithSpinner}
+        />
+      </Suspense>
     </div>
   );
 };

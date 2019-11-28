@@ -8,11 +8,10 @@ const HomeContainer = styled.div`
   align-items: center;
 `;
 
-const Home: React.FC<{}> = props => {
-  return (
-    <HomeContainer>
-      <Directory />
-    </HomeContainer>
-  );
-};
-export default Home;
+const Home: React.FC<{}> = () => (
+  <HomeContainer>
+    <Directory />
+  </HomeContainer>
+);
+
+export default React.memo(Home);
