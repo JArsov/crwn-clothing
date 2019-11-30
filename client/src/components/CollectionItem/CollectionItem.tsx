@@ -23,6 +23,7 @@ const CollectionItemContainer = styled.div`
     button {
       opacity: 0.85;
       display: flex;
+      justify-content: center;
     }
   }
 
@@ -73,7 +74,8 @@ const CollectionItemButton = styled(Button)`
   display: none;
 
   @media screen and (max-width: 800px) {
-    display: block;
+    display: flex;
+    justify-content: center;
     opacity: 0.9;
     min-width: unset;
     padding: 0 0.7rem;
