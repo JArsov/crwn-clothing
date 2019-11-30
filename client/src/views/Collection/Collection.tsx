@@ -8,10 +8,6 @@ import { ShopData } from "../../store/reducers/types/ShopState";
 import { selectCollection } from "../../store/selectors/shop/shopSelectors";
 import styled from "styled-components";
 
-export interface CollectionMatchProps {
-  collectionId: string;
-}
-
 const CollectionContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -36,13 +32,21 @@ const CategoryItemsContainer = styled.div`
   }
 `;
 
+export interface CollectionMatchProps {
+  collectionId: string;
+}
+
 const Category: React.FC<RouteComponentProps<CollectionMatchProps>> = ({
   match
 }) => {
-  const { title, items } = useSelector<RootState, Nullable<ShopData>>(
+  const shopData = useSelector<RootState, Nullable<ShopData>>(
     state => selectCollection(match.params.collectionId)(state),
     shallowEqual
   ) as ShopData;
+  if (!shopData) {
+    return null;
+  }
+  const { title, items } = shopData;
   return (
     <CollectionContainer>
       <h2>{title}</h2>

@@ -47,6 +47,12 @@ const SignInSignOutButton = styled.div`
   cursor: pointer;
 `;
 
+const CurrentUserLabel = styled.span`
+  margin-left: 1rem;
+  font-weight: bolder;
+  letter-spacing: 0.1rem;
+`;
+
 const Header: React.FC<{}> = () => {
   const dispatch = useDispatch<Dispatch<UserActionWithPayload>>();
   const currentUser = useSelector<RootState, Nullable<User>>(
@@ -66,10 +72,12 @@ const Header: React.FC<{}> = () => {
     <HeaderContainer>
       <LogoContainer to="/">
         <Logo />
+        {currentUser ? (
+          <CurrentUserLabel>{currentUser.displayName}</CurrentUserLabel>
+        ) : null}
       </LogoContainer>
       <HeaderOptionsContainer>
         <HeaderOptionsLink to="/shop">SHOP</HeaderOptionsLink>
-        <HeaderOptionsLink to="/shop">CONTACT</HeaderOptionsLink>
         {currentUser ? (
           <SignInSignOutButton onClick={handleSignOutClick}>
             SIGN OUT

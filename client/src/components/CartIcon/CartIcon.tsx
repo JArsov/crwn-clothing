@@ -18,6 +18,7 @@ const CartIconContainer = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 5;
 `;
 
 const ItemCount = styled.span`
