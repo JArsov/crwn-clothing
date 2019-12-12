@@ -8,7 +8,7 @@ in the project's root directory.
 
 ## Running the application
 The application can be started by running 'yarn dev' or 'npm run dev' accordingly. This command starts both the front-end
-and back-end applications. If you want to start the client app only, theh 'yarn client' or 'npm run client' should be used. In the same
+and back-end applications. If you want to start the client app only, then 'yarn client' or 'npm run client' should be used. In the same
 way, if you want to run the server only, 'yarn server' or 'npm run server' should be used.
 
 ## Testing
