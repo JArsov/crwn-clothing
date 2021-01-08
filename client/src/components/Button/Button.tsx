@@ -58,12 +58,13 @@ export interface ButtonProps {
   type?: 'button' | 'submit' | 'reset' | undefined;
   isGoogleSignIn?: boolean;
   isFacebookSignIn?: boolean;
+  isDisabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
   let ButtonToRender = (
-    <StyledButton type={props.type} {...props}>
+    <StyledButton disabled={props.isDisabled} type={props.type} {...props}>
       {props.children}
     </StyledButton>
   );

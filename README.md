@@ -16,16 +16,16 @@ and back-end applications.
 
 If you want to start the client app only, then 'yarn client' or 'npm run client' should be used, but have in mind that you will not be able to make a payment because payments are being handled by the server. In the same way, if you want to run the server only, 'yarn server' or 'npm run server' should be used.
 
-### Setting up the back-end
+### Setting up stripe keys
 
-The user using the application must have a valid stripe account. To make the payments work correctly, you should create a '.env' file in the root directory with the following content:
+The user using the application must have a valid stripe account. To make the payments work correctly, you should create a '.env' file in the '/client' directory with the following content:
 
 ```Javascript
-  STRIPE_PUBLIC_KEY=pk_test_...
-  STRIPE_SECRET_KEY=sk_test_...
+  REACT_APP_STRIPE_PUBLIC_KEY=pk_test_Cv3AapQSPq8sTA8QU2HJ7U5u00kJDlMnnQ
+  REACT_APP_STRIPE_SECRET_KEY=sk_test_imvs7pv4f1RwidmLKYRBKpBA006GqqWBJO
 ```
 
-The values of the keys (STRIPE_PUBLIC_KEY and STRIPE_SECRET_KEY) should be replaced with your own public and secret keys from stripe (which can be found on the stripe dashboard).
+The values of the keys (REACT_APP_STRIPE_PUBLIC_KEY and REACT_APP_STRIPE_SECRET_KEY) should be replaced with your own public and secret keys from stripe (which can be found on the stripe dashboard).
 
 ## Testing
 

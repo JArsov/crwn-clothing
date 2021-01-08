@@ -4,6 +4,7 @@ import {
 } from '../../store/selectors/cart/cartSelectors';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import Button from '../../components/Button/Button';
 import { CartItem } from '../../store/reducers/types/CartState';
 import CheckoutItem from '../../components/CheckoutItem/CheckoutItem';
 import React from 'react';
@@ -58,6 +59,32 @@ const TotalPriceContainer = styled.div`
   font-size: 2.25rem;
 `;
 
+const ClearCartContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const ClearCartButton = styled(Button)`
+  color: red;
+  border-color: red;
+  background-color: whitesmoke;
+
+  &:hover {
+    border-color: whitesmoke;
+    color: whitesmoke;
+    background-color: red;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:active {
+    border-color: transparent;
+  }
+`;
+
 const TestCardWarningMessage = styled.div`
   text-align: center;
   margin-top: 2.5rem;
@@ -96,6 +123,11 @@ const Checkout = () => {
       {cartItems.map((cartItem) => (
         <CheckoutItem key={cartItem.id} {...cartItem} />
       ))}
+      <ClearCartContainer>
+        <ClearCartButton isDisabled={!cartItems || cartItems.length === 0}>
+          Clear Cart
+        </ClearCartButton>
+      </ClearCartContainer>
       <TotalPriceContainer>
         <span>TOTAL: ${totalPrice}</span>
       </TotalPriceContainer>

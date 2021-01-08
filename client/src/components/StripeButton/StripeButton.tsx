@@ -1,7 +1,12 @@
+import {
+  CartActionWithPayload,
+  clearCart,
+} from '../../store/actions/cartActions';
+import React, { Dispatch } from 'react';
 import StripeCheckout, { Token } from 'react-stripe-checkout';
 
-import React from 'react';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 interface StripeButtonProps {
   price: number;
@@ -9,7 +14,9 @@ interface StripeButtonProps {
 
 const StripeButton = ({ price }: StripeButtonProps) => {
   const priceForStripe = price * 100; // Stripe expects the price in cents, so we must convert it from dollars
-  const publishableKey = process.env.STRIPE_PUBLIC_KEY as string;
+
+  const publishableKey = process.env.REACT_APP_STRIPE_PUBLIC_KEY as string;
+  const cartDispatch = useDispatch<Dispatch<CartActionWithPayload>>();
 
   const onTokenHandle = (token: Token) => {
     axios({
@@ -21,6 +28,7 @@ const StripeButton = ({ price }: StripeButtonProps) => {
       },
     })
       .then((_) => {
+        cartDispatch(clearCart());
         alert('Payment was successful');
       })
       .catch((error) => {
