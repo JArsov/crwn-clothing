@@ -12,7 +12,7 @@
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "start": "node server.js",
     "heroku-postbuild": "cd client && yarn && yarn --only=dev --no-shrinkwrap && yarn build",
-    "test-client": "cd client && yarn test"
+    "test-client": "cd client && yarn test --watchAll"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

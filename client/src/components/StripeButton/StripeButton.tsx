@@ -9,7 +9,7 @@ interface StripeButtonProps {
 
 const StripeButton = ({ price }: StripeButtonProps) => {
   const priceForStripe = price * 100; // Stripe expects the price in cents, so we must convert it from dollars
-  const publishableKey = 'pk_test_Cv3AapQSPq8sTA8QU2HJ7U5u00kJDlMnnQ';
+  const publishableKey = process.env.STRIPE_PUBLIC_KEY as string;
 
   const onTokenHandle = (token: Token) => {
     axios({
