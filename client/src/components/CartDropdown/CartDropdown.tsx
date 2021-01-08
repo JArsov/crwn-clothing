@@ -1,17 +1,17 @@
 import {
   CartActionWithPayload,
-  toggleCartHidden
-} from "../../store/actions/cartActions";
-import React, { Dispatch } from "react";
-import { RouteComponentProps, withRouter } from "react-router";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+  toggleCartHidden,
+} from '../../store/actions/cartActions';
+import React, { Dispatch } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import Button from "../Button/Button";
-import { CartItem } from "../../store/reducers/types/CartState";
-import CartItemComponent from "../CartItem/CartItem";
-import { RootState } from "../../store/reducers/types/RootState";
-import { selectCartItems } from "../../store/selectors/cart/cartSelectors";
-import styled from "styled-components";
+import Button from '../Button/Button';
+import { CartItem } from '../../store/reducers/types/CartState';
+import CartItemComponent from '../CartItem/CartItem';
+import { RootState } from '../../store/reducers/types/RootState';
+import { selectCartItems } from '../../store/selectors/cart/cartSelectors';
+import styled from 'styled-components';
 
 const CartDropdownContainer = styled.div`
   position: absolute;
@@ -44,7 +44,7 @@ const CartEmptyMessage = styled.span`
   margin: 2rem auto;
 `;
 
-export const CartDropdown: React.FC<RouteComponentProps> = ({ history }) => {
+export const CartDropdown = ({ history }: RouteComponentProps) => {
   const dispatch = useDispatch<Dispatch<CartActionWithPayload>>();
   const cartItems = useSelector<RootState, CartItem[]>(
     selectCartItems,
@@ -52,14 +52,14 @@ export const CartDropdown: React.FC<RouteComponentProps> = ({ history }) => {
   );
 
   const handleGoToCheckout = () => {
-    history.push("/checkout");
+    history.push('/checkout');
     dispatch(toggleCartHidden());
   };
   return (
     <CartDropdownContainer>
       <CartItemsContainer>
         {cartItems.length ? (
-          cartItems.map(cartItem => (
+          cartItems.map((cartItem) => (
             <CartItemComponent key={cartItem.id} {...cartItem} />
           ))
         ) : (

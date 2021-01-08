@@ -1,17 +1,17 @@
-import React, { Dispatch, FormEvent } from "react";
+import React, { Dispatch, FormEvent } from 'react';
 import {
   UserActionWithPayload,
-  signUpStart
-} from "../../store/actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
+  signUpStart,
+} from '../../store/actions/userActions';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Button from "../Button/Button";
-import { ErrorMessage } from "../StyledComponents/StyledComponents";
-import FormInput from "../FormInput/FormInput";
-import { RootState } from "../../store/reducers/types/RootState";
-import { selectUserErrorMessage } from "../../store/selectors/user/userSelectors";
-import styled from "styled-components";
-import useFormInput from "../../shared/useFormInput";
+import Button from '../Button/Button';
+import { ErrorMessage } from '../StyledComponents/StyledComponents';
+import FormInput from '../FormInput/FormInput';
+import { RootState } from '../../store/reducers/types/RootState';
+import { selectUserErrorMessage } from '../../store/selectors/user/userSelectors';
+import styled from 'styled-components';
+import useFormInput from '../../shared/useFormInput';
 
 const SignUpContainer = styled.div`
   display: flex;
@@ -36,11 +36,11 @@ const SignUpButton = styled(Button)`
   width: 100%;
 `;
 
-export const SignUp: React.FC<{}> = () => {
-  const displayName = useFormInput<string>("");
-  const email = useFormInput<string>("");
-  const password = useFormInput<string>("");
-  const confirmPassword = useFormInput<string>("");
+export const SignUp = () => {
+  const displayName = useFormInput<string>('');
+  const email = useFormInput<string>('');
+  const password = useFormInput<string>('');
+  const confirmPassword = useFormInput<string>('');
   const userErrorMessage = useSelector<RootState, string>(
     selectUserErrorMessage
   );
@@ -54,7 +54,7 @@ export const SignUp: React.FC<{}> = () => {
         email: email.value,
         password: password.value,
         confirmPassword: confirmPassword.value,
-        displayName: displayName.value
+        displayName: displayName.value,
       })
     );
   };

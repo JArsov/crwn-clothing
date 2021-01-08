@@ -1,19 +1,19 @@
-import React, { Dispatch, FormEvent } from "react";
+import React, { Dispatch, FormEvent } from 'react';
 import {
   UserActionWithPayload,
   emailSignInStart,
   facebookSignInStart,
-  googleSignInStart
-} from "../../store/actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
+  googleSignInStart,
+} from '../../store/actions/userActions';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Button from "../Button/Button";
-import { ErrorMessage } from "../StyledComponents/StyledComponents";
-import FormInput from "../FormInput/FormInput";
-import { RootState } from "../../store/reducers/types/RootState";
-import { selectUserErrorMessage } from "../../store/selectors/user/userSelectors";
-import styled from "styled-components";
-import useFormInput from "../../shared/useFormInput";
+import Button from '../Button/Button';
+import { ErrorMessage } from '../StyledComponents/StyledComponents';
+import FormInput from '../FormInput/FormInput';
+import { RootState } from '../../store/reducers/types/RootState';
+import { selectUserErrorMessage } from '../../store/selectors/user/userSelectors';
+import styled from 'styled-components';
+import useFormInput from '../../shared/useFormInput';
 
 const SignInContainer = styled.div`
   width: 25rem;
@@ -49,10 +49,10 @@ const SignInButton = styled(Button)`
   margin-top: 2rem;
 `;
 
-const SignIn: React.FC<{}> = () => {
+const SignIn = () => {
   const dispatch = useDispatch<Dispatch<UserActionWithPayload>>();
-  const email = useFormInput<string>("");
-  const password = useFormInput<string>("");
+  const email = useFormInput<string>('');
+  const password = useFormInput<string>('');
   const userErrorMessage = useSelector<RootState, string>(
     selectUserErrorMessage
   );

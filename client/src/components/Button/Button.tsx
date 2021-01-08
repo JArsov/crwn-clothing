@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const StyledButton = styled.button`
   min-width: 6rem;
@@ -11,7 +11,7 @@ const StyledButton = styled.button`
   background-color: black;
   color: white;
   text-transform: uppercase;
-  font-family: "Open Sans Condensed";
+  font-family: 'Open Sans Condensed';
   font-weight: bolder;
   border: none;
   cursor: pointer;
@@ -55,13 +55,13 @@ const StyledFacebookButton = styled(StyledButton)`
 `;
 
 export interface ButtonProps {
-  type?: "button" | "submit" | "reset" | undefined;
+  type?: 'button' | 'submit' | 'reset' | undefined;
   isGoogleSignIn?: boolean;
   isFacebookSignIn?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button: React.FC<ButtonProps> = props => {
+const Button: React.FC<ButtonProps> = (props) => {
   let ButtonToRender = (
     <StyledButton type={props.type} {...props}>
       {props.children}

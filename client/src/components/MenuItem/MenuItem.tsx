@@ -1,11 +1,11 @@
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import React from "react";
-import { ifProp } from "styled-tools";
-import styled from "styled-components";
+import React from 'react';
+import { ifProp } from 'styled-tools';
+import styled from 'styled-components';
 
 const MenuItemBackgroundImageContainer = styled.div<{ imageUrl: string }>`
-  background-image: url(${props => props.imageUrl});
+  background-image: url(${(props) => props.imageUrl});
   background-position: center;
   background-size: cover;
   height: 100%;
@@ -39,7 +39,7 @@ const MenuItemSubtitle = styled.span`
 
 const MenuItemContainer = styled.div<{ size?: string }>`
   min-width: 30%;
-  height: ${ifProp("size", "20rem", "13rem")};
+  height: ${ifProp('size', '20rem', '13rem')};
   flex: 1 1 auto;
   display: flex;
   align-items: center;
@@ -86,14 +86,14 @@ export interface MenuItemProps {
   menuItem: MenuItemModel;
 }
 
-export const MenuItem: React.FC<MenuItemModel & RouteComponentProps> = ({
+export const MenuItem = ({
   title,
   imageUrl,
   size,
   linkUrl,
   match,
-  history
-}) => {
+  history,
+}: MenuItemModel & RouteComponentProps) => {
   const navigateToView = () => {
     history.push(`${match.url}${linkUrl}`);
   };

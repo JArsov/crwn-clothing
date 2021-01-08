@@ -1,7 +1,7 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent } from 'react';
 
-import styled from "styled-components";
-import { subColor } from "../../shared/styles.variables";
+import styled from 'styled-components';
+import { subColor } from '../../shared/styles.variables';
 
 const FromInputContainer = styled.div`
   position: relative;
@@ -43,7 +43,7 @@ export interface FormInputProps {
   id: string;
 }
 
-const FormInput: React.FC<FormInputProps> = props => {
+const FormInput = (props: FormInputProps) => {
   return (
     <FromInputContainer>
       {props.label ? (

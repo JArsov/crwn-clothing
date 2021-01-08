@@ -1,7 +1,7 @@
-import React from "react";
-import SignIn from "../../components/SignIn/SignIn";
-import SignUp from "../../components/SignUp/SignUp";
-import styled from "styled-components";
+import React from 'react';
+import SignIn from '../../components/SignIn/SignIn';
+import SignUp from '../../components/SignUp/SignUp';
+import styled from 'styled-components';
 
 const SignInSignUpContainer = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const SignInSignUpContainer = styled.div`
   }
 `;
 
-const SignInSignUp: React.FC<{}> = () => {
+const SignInSignUp = () => {
   return (
     <SignInSignUpContainer>
       <SignIn />

@@ -1,19 +1,19 @@
-import { Nullable, RootState } from "../../store/reducers/types/RootState";
-import React, { Dispatch } from "react";
+import { Nullable, RootState } from '../../store/reducers/types/RootState';
+import React, { Dispatch } from 'react';
 import {
   UserActionWithPayload,
-  signOutStart
-} from "../../store/actions/userActions";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+  signOutStart,
+} from '../../store/actions/userActions';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import CartDropdown from "../CartDropdown/CartDropdown";
-import CartIcon from "../CartIcon/CartIcon";
-import { Link } from "react-router-dom";
-import { ReactComponent as Logo } from "../../assets/crown.svg";
-import { User } from "../../store/reducers/types/UserState";
-import { selectCurrentUser } from "../../store/selectors/user/userSelectors";
-import { selectIsCartHidden } from "../../store/selectors/cart/cartSelectors";
-import styled from "styled-components";
+import CartDropdown from '../CartDropdown/CartDropdown';
+import CartIcon from '../CartIcon/CartIcon';
+import { Link } from 'react-router-dom';
+import { ReactComponent as Logo } from '../../assets/crown.svg';
+import { User } from '../../store/reducers/types/UserState';
+import { selectCurrentUser } from '../../store/selectors/user/userSelectors';
+import { selectIsCartHidden } from '../../store/selectors/cart/cartSelectors';
+import styled from 'styled-components';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -53,7 +53,7 @@ const CurrentUserLabel = styled.span`
   letter-spacing: 0.1rem;
 `;
 
-const Header: React.FC<{}> = () => {
+const Header = () => {
   const dispatch = useDispatch<Dispatch<UserActionWithPayload>>();
   const currentUser = useSelector<RootState, Nullable<User>>(
     selectCurrentUser,

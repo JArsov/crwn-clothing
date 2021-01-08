@@ -1,13 +1,13 @@
 import {
   CartActionTypes,
-  CartActionWithPayload
-} from "../../store/actions/cartActions";
-import React, { Dispatch } from "react";
+  CartActionWithPayload,
+} from '../../store/actions/cartActions';
+import React, { Dispatch } from 'react';
 
-import Button from "../Button/Button";
-import { ShopDataItem } from "../../store/reducers/types/ShopState";
-import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import Button from '../Button/Button';
+import { ShopDataItem } from '../../store/reducers/types/ShopState';
+import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 
 const CollectionItemContainer = styled.div`
   display: flex;
@@ -44,7 +44,7 @@ const CollectionItemImage = styled.div<{ imageUrl: string }>`
   background-position: center;
   width: 100%;
   height: 95%;
-  background-image: url(${props => props.imageUrl});
+  background-image: url(${(props) => props.imageUrl});
   margin-bottom: 0.3rem;
 `;
 
@@ -72,6 +72,7 @@ const CollectionItemButton = styled(Button)`
   position: absolute;
   top: 16rem;
   display: none;
+  align-items: center;
 
   @media screen and (max-width: 800px) {
     display: flex;
@@ -86,14 +87,14 @@ interface CollectionItemProps {
   item: ShopDataItem;
 }
 
-const CollectionItem: React.FC<CollectionItemProps> = ({ item }) => {
+const CollectionItem = ({ item }: CollectionItemProps) => {
   const dispatch = useDispatch<Dispatch<CartActionWithPayload>>();
   const addToCartHandler = () => {
     dispatch({
       type: CartActionTypes.ADD_ITEM,
       payload: {
-        item
-      }
+        item,
+      },
     });
   };
   return (

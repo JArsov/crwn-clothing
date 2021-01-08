@@ -1,12 +1,12 @@
-import { Nullable, RootState } from "../../store/reducers/types/RootState";
-import { shallowEqual, useSelector } from "react-redux";
+import { Nullable, RootState } from '../../store/reducers/types/RootState';
+import { shallowEqual, useSelector } from 'react-redux';
 
-import CollectionItem from "../../components/CollectionItem/CollectionItem";
-import React from "react";
-import { RouteComponentProps } from "react-router";
-import { ShopData } from "../../store/reducers/types/ShopState";
-import { selectCollection } from "../../store/selectors/shop/shopSelectors";
-import styled from "styled-components";
+import CollectionItem from '../../components/CollectionItem/CollectionItem';
+import React from 'react';
+import { RouteComponentProps } from 'react-router';
+import { ShopData } from '../../store/reducers/types/ShopState';
+import { selectCollection } from '../../store/selectors/shop/shopSelectors';
+import styled from 'styled-components';
 
 const CollectionContainer = styled.div`
   display: flex;
@@ -36,11 +36,9 @@ export interface CollectionMatchProps {
   collectionId: string;
 }
 
-const Category: React.FC<RouteComponentProps<CollectionMatchProps>> = ({
-  match
-}) => {
+const Category = ({ match }: RouteComponentProps<CollectionMatchProps>) => {
   const shopData = useSelector<RootState, Nullable<ShopData>>(
-    state => selectCollection(match.params.collectionId)(state),
+    (state) => selectCollection(match.params.collectionId)(state),
     shallowEqual
   ) as ShopData;
   if (!shopData) {
@@ -51,7 +49,7 @@ const Category: React.FC<RouteComponentProps<CollectionMatchProps>> = ({
     <CollectionContainer>
       <h2>{title}</h2>
       <CategoryItemsContainer>
-        {items.map(item => (
+        {items.map((item) => (
           <CollectionItem key={item.id} item={item} />
         ))}
       </CategoryItemsContainer>

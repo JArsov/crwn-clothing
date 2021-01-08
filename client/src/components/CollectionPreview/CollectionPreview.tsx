@@ -1,7 +1,7 @@
-import CollectionItem from "../CollectionItem/CollectionItem";
-import React from "react";
-import { ShopData } from "../../store/reducers/types/ShopState";
-import styled from "styled-components";
+import CollectionItem from '../CollectionItem/CollectionItem';
+import React from 'react';
+import { ShopData } from '../../store/reducers/types/ShopState';
+import styled from 'styled-components';
 
 const CollectionPreviewContainer = styled.div`
   display: flex;
@@ -29,14 +29,14 @@ const PreviewContainer = styled.div`
   }
 `;
 
-const CollectionPreview: React.FC<ShopData> = ({ title, items }) => {
+const CollectionPreview = ({ title, items }: ShopData) => {
   return (
     <CollectionPreviewContainer>
       <CollectionPreviewTitle>{title}</CollectionPreviewTitle>
       <PreviewContainer data-testid={title}>
         {items
           .filter((_, index) => index < 4)
-          .map(item => (
+          .map((item) => (
             <CollectionItem key={item.id} item={item} />
           ))}
       </PreviewContainer>

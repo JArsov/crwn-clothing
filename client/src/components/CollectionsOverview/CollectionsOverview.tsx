@@ -1,18 +1,18 @@
-import { Nullable, RootState } from "../../store/reducers/types/RootState";
-import { shallowEqual, useSelector } from "react-redux";
+import { Nullable, RootState } from '../../store/reducers/types/RootState';
+import { shallowEqual, useSelector } from 'react-redux';
 
-import CollectionPreview from "../CollectionPreview/CollectionPreview";
-import React from "react";
-import { ShopData } from "../../store/reducers/types/ShopState";
-import { selectCollectionsForPreview } from "../../store/selectors/shop/shopSelectors";
-import styled from "styled-components";
+import CollectionPreview from '../CollectionPreview/CollectionPreview';
+import React from 'react';
+import { ShopData } from '../../store/reducers/types/ShopState';
+import { selectCollectionsForPreview } from '../../store/selectors/shop/shopSelectors';
+import styled from 'styled-components';
 
 const CollectionsOverviewContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const CollectionsOverview: React.FC<{}> = () => {
+const CollectionsOverview = () => {
   const collections = useSelector<RootState, Nullable<ShopData[]>>(
     selectCollectionsForPreview,
     shallowEqual
@@ -20,7 +20,7 @@ const CollectionsOverview: React.FC<{}> = () => {
   return (
     <CollectionsOverviewContainer>
       {collections
-        ? collections.map(collection => (
+        ? collections.map((collection) => (
             <CollectionPreview key={collection.id} {...collection} />
           ))
         : null}

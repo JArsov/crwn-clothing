@@ -1,14 +1,14 @@
 import {
   CartActionTypes,
-  CartActionWithPayload
-} from "../../store/actions/cartActions";
-import React, { Dispatch } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+  CartActionWithPayload,
+} from '../../store/actions/cartActions';
+import React, { Dispatch } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from "../../store/reducers/types/RootState";
-import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
-import { selectCartItemsTotalQuantity } from "../../store/selectors/cart/cartSelectors";
-import styled from "styled-components";
+import { RootState } from '../../store/reducers/types/RootState';
+import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
+import { selectCartItemsTotalQuantity } from '../../store/selectors/cart/cartSelectors';
+import styled from 'styled-components';
 
 const CartIconContainer = styled.div`
   width: 3rem;
@@ -33,7 +33,7 @@ const StyledShoppingIcon = styled(ShoppingIcon)`
   height: 1.5rem;
 `;
 
-const CartIcon: React.FC<{}> = () => {
+const CartIcon = () => {
   const dispatch = useDispatch<Dispatch<CartActionWithPayload>>();
   const cartItemsQuantity = useSelector<RootState, number>(
     selectCartItemsTotalQuantity,
@@ -42,7 +42,7 @@ const CartIcon: React.FC<{}> = () => {
 
   const handleCartIconClick = () => {
     dispatch({
-      type: CartActionTypes.TOGGLE_CART_HIDDEN
+      type: CartActionTypes.TOGGLE_CART_HIDDEN,
     });
   };
 

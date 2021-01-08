@@ -1,12 +1,12 @@
 import {
   CartActionTypes,
-  CartActionWithPayload
-} from "../../store/actions/cartActions";
-import React, { Dispatch } from "react";
+  CartActionWithPayload,
+} from '../../store/actions/cartActions';
+import React, { Dispatch } from 'react';
 
-import { CartItem } from "../../store/reducers/types/CartState";
-import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { CartItem } from '../../store/reducers/types/CartState';
+import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 
 const CheckoutItemContainer = styled.div`
   width: 100%;
@@ -57,31 +57,31 @@ const QuantityValue = styled.span`
   margin: 0 0.7rem;
 `;
 
-const CheckoutItem: React.FC<CartItem> = cartItem => {
+const CheckoutItem = (cartItem: CartItem) => {
   const { name, price, quantity, imageUrl } = cartItem;
   const dispatch = useDispatch<Dispatch<CartActionWithPayload>>();
   const clearItemHandler = () => {
     dispatch({
       type: CartActionTypes.CLEAR_ITEM,
       payload: {
-        item: cartItem
-      }
+        item: cartItem,
+      },
     });
   };
   const addItemToCartHandler = () => {
     dispatch({
       type: CartActionTypes.ADD_ITEM,
       payload: {
-        item: cartItem
-      }
+        item: cartItem,
+      },
     });
   };
   const removeItemFromCartHandler = () => {
     dispatch({
       type: CartActionTypes.REMOVE_ITEM,
       payload: {
-        item: cartItem
-      }
+        item: cartItem,
+      },
     });
   };
   return (

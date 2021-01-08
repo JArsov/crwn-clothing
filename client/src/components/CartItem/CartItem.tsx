@@ -1,6 +1,6 @@
-import { CartItem } from "../../store/reducers/types/CartState";
-import React from "react";
-import styled from "styled-components";
+import { CartItem } from '../../store/reducers/types/CartState';
+import React from 'react';
+import styled from 'styled-components';
 
 const CartItemContainer = styled.div`
   width: 100%;
@@ -31,12 +31,7 @@ const CartItemPrice = styled.span``;
 /**
  * I am using Component suffix to differentiate the Component with the model itself
  */
-const CartItemComponent: React.FC<CartItem> = ({
-  name,
-  imageUrl,
-  price,
-  quantity
-}) => {
+const CartItemComponent = ({ name, imageUrl, price, quantity }: CartItem) => {
   return (
     <CartItemContainer>
       <CartItemImage src={imageUrl} alt="item" />

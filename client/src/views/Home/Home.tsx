@@ -1,6 +1,6 @@
-import Directory from "../../components/Directory/Directory";
-import React from "react";
-import styled from "styled-components";
+import Directory from '../../components/Directory/Directory';
+import React from 'react';
+import styled from 'styled-components';
 
 const HomeContainer = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ const HomeContainer = styled.div`
   align-items: center;
 `;
 
-const Home: React.FC<{}> = () => (
+const Home = () => (
   <HomeContainer>
     <Directory />
   </HomeContainer>

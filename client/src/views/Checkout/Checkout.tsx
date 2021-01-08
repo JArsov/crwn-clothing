@@ -1,15 +1,15 @@
 import {
   selectCartItems,
-  selectCartTotalPrice
-} from "../../store/selectors/cart/cartSelectors";
-import { shallowEqual, useSelector } from "react-redux";
+  selectCartTotalPrice,
+} from '../../store/selectors/cart/cartSelectors';
+import { shallowEqual, useSelector } from 'react-redux';
 
-import { CartItem } from "../../store/reducers/types/CartState";
-import CheckoutItem from "../../components/CheckoutItem/CheckoutItem";
-import React from "react";
-import { RootState } from "../../store/reducers/types/RootState";
-import StripeButton from "../../components/StripeButton/StripeButton";
-import styled from "styled-components";
+import { CartItem } from '../../store/reducers/types/CartState';
+import CheckoutItem from '../../components/CheckoutItem/CheckoutItem';
+import React from 'react';
+import { RootState } from '../../store/reducers/types/RootState';
+import StripeButton from '../../components/StripeButton/StripeButton';
+import styled from 'styled-components';
 
 const CheckoutContainer = styled.div`
   width: 55%;
@@ -65,7 +65,7 @@ const TestCardWarningMessage = styled.div`
   color: red;
 `;
 
-const Checkout: React.FC<{}> = () => {
+const Checkout = () => {
   const totalPrice = useSelector<RootState, number>(
     selectCartTotalPrice,
     shallowEqual
@@ -93,7 +93,7 @@ const Checkout: React.FC<{}> = () => {
           <span>Remove</span>
         </CheckoutHeaderBlock>
       </CheckoutHeader>
-      {cartItems.map(cartItem => (
+      {cartItems.map((cartItem) => (
         <CheckoutItem key={cartItem.id} {...cartItem} />
       ))}
       <TotalPriceContainer>
@@ -102,7 +102,7 @@ const Checkout: React.FC<{}> = () => {
       <TestCardWarningMessage>
         *Please use the following test credit card for payments*
         <br />
-        4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
+        4242 4242 4242 4242 - Exp: 01/30 - CVV: 123
       </TestCardWarningMessage>
       <StripeButton price={totalPrice} />
     </CheckoutContainer>
