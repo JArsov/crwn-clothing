@@ -21,8 +21,8 @@ If you want to start the client app only, then 'yarn client' or 'npm run client'
 The user using the application must have a valid stripe account. To make the payments work correctly, you should create a '.env' file in the '/client' directory with the following content:
 
 ```Javascript
-  REACT_APP_STRIPE_PUBLIC_KEY=pk_test_Cv3AapQSPq8sTA8QU2HJ7U5u00kJDlMnnQ
-  REACT_APP_STRIPE_SECRET_KEY=sk_test_imvs7pv4f1RwidmLKYRBKpBA006GqqWBJO
+  REACT_APP_STRIPE_PUBLIC_KEY=pk_test_...
+  REACT_APP_STRIPE_SECRET_KEY=sk_test_...
 ```
 
 The values of the keys (REACT_APP_STRIPE_PUBLIC_KEY and REACT_APP_STRIPE_SECRET_KEY) should be replaced with your own public and secret keys from stripe (which can be found on the stripe dashboard).
