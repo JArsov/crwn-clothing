@@ -1,13 +1,17 @@
 import {
+  CartActionWithPayload,
+  clearCart,
+} from '../../store/actions/cartActions';
+import React, { Dispatch } from 'react';
+import {
   selectCartItems,
   selectCartTotalPrice,
 } from '../../store/selectors/cart/cartSelectors';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import Button from '../../components/Button/Button';
 import { CartItem } from '../../store/reducers/types/CartState';
 import CheckoutItem from '../../components/CheckoutItem/CheckoutItem';
-import React from 'react';
 import { RootState } from '../../store/reducers/types/RootState';
 import StripeButton from '../../components/StripeButton/StripeButton';
 import styled from 'styled-components';
@@ -78,6 +82,7 @@ const ClearCartButton = styled(Button)`
 
   &:disabled {
     cursor: not-allowed;
+    opacity: 0.5;
   }
 
   &:active {
@@ -101,6 +106,13 @@ const Checkout = () => {
     selectCartItems,
     shallowEqual
   );
+  const cartDispatch = useDispatch<Dispatch<CartActionWithPayload>>();
+  const clearCartHandler = () => {
+    const result = window.confirm('Are you sure you want to clear your cart?');
+    if (result) {
+      cartDispatch(clearCart());
+    }
+  };
   return (
     <CheckoutContainer>
       <CheckoutHeader>
@@ -124,7 +136,10 @@ const Checkout = () => {
         <CheckoutItem key={cartItem.id} {...cartItem} />
       ))}
       <ClearCartContainer>
-        <ClearCartButton isDisabled={!cartItems || cartItems.length === 0}>
+        <ClearCartButton
+          isDisabled={!cartItems || cartItems.length === 0}
+          onClick={clearCartHandler}
+        >
           Clear Cart
         </ClearCartButton>
       </ClearCartContainer>
